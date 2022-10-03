@@ -1,9 +1,8 @@
+import React from "react";
 import { Input } from "./CustomInputStyles";
 
-export const CustomInput = ({ placeholder, name }) => {
-  return (
-    <>
-      <Input name={name} placeholder={placeholder} />
-    </>
-  );
-};
+export const CustomInput = React.forwardRef(
+  (props, ref) => {
+    return <Input {...props} ref={ref} />;
+  }
+);

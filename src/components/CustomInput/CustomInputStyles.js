@@ -11,6 +11,7 @@ export const Input = styled.input`
   background-color: ${Colors.gray3};
   border: 1px solid ${Colors.gray5};
   border-radius: 3px;
+  color: ${Colors.text.gray0};
 
   input:focus {
     box-shadow: 0 0 0 0;

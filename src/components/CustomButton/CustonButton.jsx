@@ -1,9 +1,16 @@
 import { Button } from "./CustonButtonStyles";
 
-export const CustonButton = ({ children, onCLick }) => {
+export const CustonButton = ({
+  children,
+  startIcon,
+  ...rest
+}) => {
   return (
     <>
-      <Button onClick={onCLick}>{children}</Button>
+      <Button {...rest}>
+        {startIcon}
+        {children}
+      </Button>
     </>
   );
 };
