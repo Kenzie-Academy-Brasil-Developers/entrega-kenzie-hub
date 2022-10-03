@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,8 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
 
 export const SignUp = () => {
-  const [newUser, setNewUser] = useState([]);
-
   const formSchema = yup.object().shape({
     name: yup
       .string()
@@ -119,7 +116,6 @@ export const SignUp = () => {
           progress: undefined,
         });
         goHome();
-        console.log(response);
       })
       .catch((err) => {
         toast.error(
@@ -137,7 +133,6 @@ export const SignUp = () => {
         console.log(err);
       });
   };
-  // console.log(newUser);
 
   return (
     <>
