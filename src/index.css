@@ -5,5 +5,10 @@
   list-style: none;
   text-decoration: none;
   font-family: "Inter", sans-serif;
-  background: #121214;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  background-color: #121214;
 }
