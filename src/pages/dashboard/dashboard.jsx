@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
-import { CustonButton } from "../../components/CustomButton/CustonButton";
+// Utilities
 import { api } from "../../services/api";
+
+// Components
+import { CustonButton } from "../../components/CustomButton/CustonButton";
+
+// Styles
 import { Container, HeaderDash } from "./dashboardStyles";
 
 export const Dashboard = () => {
