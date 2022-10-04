@@ -22,7 +22,7 @@ export const DivForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 33.6911px 17.6477px;
+  padding: 20px 17px;
   gap: 17.65px;
   width: 296px;
   height: 402.69px;

@@ -43,14 +43,13 @@ export const DivForm = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  padding: 20px 10px;
+  padding: 10px 10px;
   margin: 40px auto;
   width: 295.83px;
-  height: 709.96px;
+  height: 710px;
   background-color: ${Colors.gray2};
   box-shadow: 0px 3.19812px 31.9812px -7.99531px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
-  overflow-y: scroll;
 
   h2 {
     font-size: 1.2rem;
