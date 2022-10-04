@@ -17,12 +17,15 @@ export const HeaderRegister = styled.div`
   }
 
   button {
-    width: 79.54px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    width: 100px;
     height: 31.95px;
     background-color: ${Colors.gray3};
     border: 1px solid ${Colors.gray3};
     border-radius: 4px;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     line-height: 1.2rem;
     font-weight: 600;
     color: ${Colors.text.gray0};

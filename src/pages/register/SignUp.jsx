@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { FiLogIn } from "react-icons/fi";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 // Utilities
@@ -138,7 +139,10 @@ export const SignUp = () => {
     <>
       <HeaderRegister>
         <h1>Kenzie Hub</h1>
-        <CustonButton onClick={() => goHome()}>
+        <CustonButton
+          onClick={() => goHome()}
+          startIcon={<RiLogoutBoxLine size={16} />}
+        >
           Voltar
         </CustonButton>
       </HeaderRegister>
@@ -234,7 +238,10 @@ export const SignUp = () => {
           </option>
         </select>
 
-        <CustonButton type="submit" startIcon={<FiLogIn />}>
+        <CustonButton
+          type="submit"
+          startIcon={<FiLogIn size={18} />}
+        >
           Cadastrar
         </CustonButton>
       </DivForm>
