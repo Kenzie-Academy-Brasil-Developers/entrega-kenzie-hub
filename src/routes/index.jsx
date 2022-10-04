@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard } from "../pages/dashboard/dashboard";
 import { Login } from "../pages/login/login";
 import { Notfound } from "../pages/notfound/notfound";
@@ -9,6 +9,6 @@ export const RoutesMain = () => (
     <Route path="/" element={<Login />} />
     <Route path="/register" element={<SignUp />} />
     <Route path="/dashboard" element={<Dashboard />} />
-    <Route path="*" element={<Notfound />} />
+    <Route path="*" element={<Navigate to={"/"} />} />
   </Routes>
 );
