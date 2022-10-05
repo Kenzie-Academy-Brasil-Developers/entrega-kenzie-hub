@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Dashboard } from "../pages/dashboard/dashboard";
 import { Login } from "../pages/login/login";
-import { Notfound } from "../pages/notfound/notfound";
 import { SignUp } from "../pages/register/SignUp";
 
 export const RoutesMain = () => (
