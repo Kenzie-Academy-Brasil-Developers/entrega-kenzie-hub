@@ -3,7 +3,7 @@ import Colors from "../../themes/themes";
 
 export const ErrorMessage = styled.p`
   font-size: 0.75rem;
-  margin-top: -15px;
+  margin-top: -10px;
   padding: 0;
   color: ${Colors.feedback.negative};
 `;

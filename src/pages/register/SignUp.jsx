@@ -55,9 +55,7 @@ export const SignUp = () => {
       )
       .matches(
         "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-        <InputErrorMessage>
-          Formato inválido"
-        </InputErrorMessage>
+        "Formato inválido, adicione pelo menos uma letra maiuscula e um caracter especial"
       ),
     confirmPass: yup
       .string()
@@ -74,9 +72,7 @@ export const SignUp = () => {
       )
       .matches(
         "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-        <InputErrorMessage>
-          Formato inválido"
-        </InputErrorMessage>
+        "Formato inválido, adicione pelo menos uma letra maiuscula e um caracter especial"
       ),
     bio: yup
       .string()
@@ -195,7 +191,9 @@ export const SignUp = () => {
           type="password"
           {...register("password")}
         />
-        {errors.password?.message}
+        <InputErrorMessage>
+          {errors.password?.message}
+        </InputErrorMessage>
 
         <CustomLabel labelName="confirmPass">
           Confirmar senha
@@ -210,7 +208,9 @@ export const SignUp = () => {
             },
           })}
         />
-        {errors.confirmPass?.message}
+        <InputErrorMessage>
+          {errors.confirmPass?.message}
+        </InputErrorMessage>
 
         <CustomLabel labelName="bio">Bio</CustomLabel>
         <CustomInput
