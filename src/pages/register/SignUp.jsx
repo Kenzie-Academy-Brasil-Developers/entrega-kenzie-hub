@@ -1,10 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import { FiLogIn } from "react-icons/fi";
 import { RiLogoutBoxLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 
 // Utilities
 import { api } from "../../services/api";
@@ -47,9 +47,17 @@ export const SignUp = () => {
           Senha obrigatória
         </InputErrorMessage>
       )
+      .min(
+        8,
+        <InputErrorMessage>
+          A senha deve conter no mínimo 8 caracteres
+        </InputErrorMessage>
+      )
       .matches(
         "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-        "Formato inválido"
+        <InputErrorMessage>
+          Formato inválido"
+        </InputErrorMessage>
       ),
     confirmPass: yup
       .string()
@@ -58,9 +66,17 @@ export const SignUp = () => {
           Confirmação de senha obrigatória
         </InputErrorMessage>
       )
+      .min(
+        8,
+        <InputErrorMessage>
+          A senha deve conter no mínimo 8 caracteres
+        </InputErrorMessage>
+      )
       .matches(
         "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-        "Formato inválido"
+        <InputErrorMessage>
+          Formato inválido"
+        </InputErrorMessage>
       ),
     bio: yup
       .string()
@@ -89,6 +105,7 @@ export const SignUp = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
@@ -133,6 +150,8 @@ export const SignUp = () => {
         );
         console.log(err);
       });
+
+    reset();
   };
 
   return (
@@ -167,13 +186,14 @@ export const SignUp = () => {
         />
         {errors.email?.message}
 
-        <CustomLabel labelName="password">
+        <CustomLabel labelName="password" type="password">
           Senha
         </CustomLabel>
         <CustomInput
           name="password"
           placeholder="Digite sua senha"
-          {...register("password", { minLength: 8 })}
+          type="password"
+          {...register("password")}
         />
         {errors.password?.message}
 
@@ -183,8 +203,8 @@ export const SignUp = () => {
         <CustomInput
           name="confirmsPass"
           placeholder="Confirme a senha"
+          type="password"
           {...register("confirmPass", {
-            minLength: 8,
             validate: (value) => {
               return value === watchPassword;
             },
