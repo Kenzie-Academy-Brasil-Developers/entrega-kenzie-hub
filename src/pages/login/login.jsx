@@ -118,6 +118,7 @@ export const Login = () => {
           <CustomInput
             name={"password"}
             placeholder="Digite sua senha"
+            type="password"
             {...register("password")}
           />
           {errors.password?.message}
