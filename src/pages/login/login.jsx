@@ -1,30 +1,20 @@
+import { useContext } from "react";
 import { DivContainer, DivForm } from "./loginStyles";
 import { FiLogIn } from "react-icons/fi";
-import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-// Utilities
-import { api } from "../../services/api";
 
 // Components
 import { CustonButton } from "../../components/CustomButton/CustonButton";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomLabel } from "../../components/CustomLabels/CustomLabels";
-import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+
 import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
 
 export const Login = () => {
-  const navigate = useNavigate();
-
-  const goDashboard = () => {
-    navigate("/dashboard");
-  };
-
-  const goSignUp = () => {
-    navigate("/register");
-  };
+  const { handleForm, goSignUp } = useContext(UserContext);
 
   const loginScheme = yup.object().shape({
     email: yup
@@ -55,47 +45,6 @@ export const Login = () => {
   } = useForm({
     resolver: yupResolver(loginScheme),
   });
-
-  const handleForm = (user) => {
-    api
-      .post("/sessions", { ...user })
-      .then((response) => {
-        window.localStorage.clear();
-        window.localStorage.setItem(
-          "KenzieHub:token",
-          response.data.token
-        );
-        window.localStorage.setItem(
-          "KenzieHub:ID",
-          response.data.user.id
-        );
-        toast.success("Login realizado!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        goDashboard();
-      })
-      .catch((err) => {
-        toast.error(
-          "Ops, algo deu errado, confira os dados e tente novamente!",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        console.log(err);
-      });
-  };
 
   return (
     <DivContainer>

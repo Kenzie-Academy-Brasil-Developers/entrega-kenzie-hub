@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
+
 import { FiLogIn } from "react-icons/fi";
 import { RiLogoutBoxLine } from "react-icons/ri";
-
-// Utilities
-import { api } from "../../services/api";
 
 // Components
 import { CustonButton } from "../../components/CustomButton/CustonButton";
@@ -18,6 +15,7 @@ import { CustomLabel } from "../../components/CustomLabels/CustomLabels";
 import { DivForm, HeaderRegister } from "./registerStyles";
 import "react-toastify/dist/ReactToastify.css";
 import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
+import { UserContext } from "../../context/UserContext";
 
 export const SignUp = () => {
   const formSchema = yup.object().shape({
@@ -101,7 +99,6 @@ export const SignUp = () => {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
@@ -109,46 +106,7 @@ export const SignUp = () => {
 
   const watchPassword = watch("password");
 
-  const navigate = useNavigate();
-
-  const goHome = () => {
-    navigate("/");
-  };
-
-  const onSubmit = (data) => {
-    api
-      .post("/users", data)
-      .then((response) => response.data)
-      .then((response) => {
-        toast.success("Conta criada com sucesso!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        goHome();
-      })
-      .catch((err) => {
-        toast.error(
-          "Ops, algo deu errado, confira os dados e tente novamente!",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
-        console.log(err);
-      });
-
-    reset();
-  };
+  const { onSubmit, goHome } = useContext(UserContext);
 
   return (
     <>

@@ -81,8 +81,8 @@ export const DivForm = styled.form`
   }
 
   button {
-    background-color: ${Colors.primaryHover};
-    border: 1px solid ${Colors.primaryHover};
+    background-color: ${Colors.primaryNegative};
+    border: 1px solid ${Colors.primaryNegative};
     color: ${Colors.text.white};
     font-size: 0.9rem;
     line-height: 1.2rem;
@@ -91,6 +91,6 @@ export const DivForm = styled.form`
   }
 
   button:hover {
-    background-color: ${Colors.primary};
+    background-color: ${Colors.primaryHover};
   }
 `;
