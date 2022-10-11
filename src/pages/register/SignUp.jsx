@@ -117,10 +117,12 @@ export const SignUp = () => {
     <>
       <HeaderRegister>
         <h1>Kenzie Hub</h1>
-        <DivBackLogin>
-          <RiLogoutBoxLine size={16} />
-          <Link to={"/login"}>Voltar</Link>
-        </DivBackLogin>
+        <Link to={"/login"}>
+          <DivBackLogin>
+            <RiLogoutBoxLine size={16} />
+            Voltar
+          </DivBackLogin>
+        </Link>
       </HeaderRegister>
 
       <DivForm onSubmit={handleSubmit(onSubmit)}>

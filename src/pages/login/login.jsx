@@ -82,9 +82,9 @@ export const Login = () => {
           </CustonButton>
         </form>
         <span>Ainda não possui uma conta?</span>
-        <DivLink>
-          <Link to={"/register"}>Cadastre-se</Link>
-        </DivLink>
+        <Link to={"/register"}>
+          <DivLink>Cadastre-se</DivLink>
+        </Link>
       </DivForm>
     </DivContainer>
   );
