@@ -6,10 +6,12 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 // Utilities
 import { UserContext } from "../../context/UserContext";
+import { TechContext } from "../../context/TachContext";
 
 // Components
 import { CustonButton } from "../../components/CustomButton/CustonButton";
 import { AddTechModal } from "../../components/CustomModal/AddTechModal";
+import { PatchTechModal } from "../../components/CustomModal/PatchTechModal";
 
 // Styles
 import {
@@ -17,13 +19,16 @@ import {
   ContainerTecs,
   HeaderDash,
 } from "./dashboardStyles";
-import { TechContext } from "../../context/TachContext";
 
 export const Dashboard = () => {
   const { getProfile, getTecs } = useContext(UserContext);
 
-  const { onOpen, handleDeleteTeach } =
-    useContext(TechContext);
+  const {
+    onOpenAdd,
+    handleDeleteTeach,
+    onOpenTech,
+    setGetId,
+  } = useContext(TechContext);
 
   const navigate = useNavigate();
 
@@ -55,14 +60,18 @@ export const Dashboard = () => {
             </ul>
             <div className="tecnologias">
               <h3>Tecnologias</h3>
-              <button onClick={onOpen}>
+              <button onClick={onOpenAdd}>
                 <IoIosAdd size={20} color="#F8F9FA" />
               </button>
             </div>
           </Container>
           <ContainerTecs>
             {getTecs.map((item) => (
-              <li key={item.id}>
+              <li
+                key={item.id}
+                onClick={onOpenTech}
+                onClickCapture={() => setGetId(item.id)}
+              >
                 <p>{item.title}</p>
                 <div className="status">
                   <span>{item.status}</span>
@@ -82,6 +91,7 @@ export const Dashboard = () => {
         <Navigate to="/" replace />
       )}
       <AddTechModal />
+      <PatchTechModal />
     </>
   );
 };

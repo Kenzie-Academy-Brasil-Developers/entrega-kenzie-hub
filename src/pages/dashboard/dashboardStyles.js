@@ -153,6 +153,7 @@ export const ContainerTecs = styled.ul`
     padding: 10px;
     background-color: ${Colors.gray1};
     transition: 0.3s ease;
+    cursor: pointer;
 
     &:hover {
       background-color: ${Colors.gray3};

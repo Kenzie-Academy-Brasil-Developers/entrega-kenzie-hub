@@ -1,7 +1,5 @@
 import { useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { IoMdBuild } from "react-icons/io";
 import {
   Modal,
@@ -14,40 +12,25 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input,
   Select,
 } from "@chakra-ui/react";
 
 // Utilities
 import { TechContext } from "../../context/TachContext";
 
-// Components
-import { InputErrorMessage } from "../errorMessage/errorMessage";
-
 // Styles
 import { DivModal, Options } from "./ModalStyles";
 
-export const AddTechModal = () => {
-  const techSchema = yup.object().shape({
-    title: yup
-      .string()
-      .required(
-        <InputErrorMessage>
-          Nome da técnologia obrigatório
-        </InputErrorMessage>
-      ),
-  });
+export const PatchTechModal = () => {
+  const { register, handleSubmit } = useForm();
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(techSchema),
-  });
-
-  const { handleFormTech, isOpenAdd, onCloseAdd } =
-    useContext(TechContext);
+    handlePathTech,
+    isOpenTech,
+    onCloseTech,
+    handleDeleteTeach,
+    getId,
+  } = useContext(TechContext);
 
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -57,8 +40,8 @@ export const AddTechModal = () => {
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
-        isOpen={isOpenAdd}
-        onClose={onCloseAdd}
+        isOpen={isOpenTech}
+        onClose={onCloseTech}
       >
         <ModalOverlay />
         <ModalContent w={300} top="100">
@@ -71,23 +54,8 @@ export const AddTechModal = () => {
             Cadastrar Tecnologia
           </ModalHeader>
           <ModalCloseButton color="#F8F9FA" />
-          <form onSubmit={handleSubmit(handleFormTech)}>
+          <form onSubmit={handleSubmit(handlePathTech)}>
             <ModalBody pb={6} bg="#212529">
-              <FormControl>
-                <FormLabel color="#F8F9FA" fontSize={12}>
-                  Nome
-                </FormLabel>
-                <Input
-                  ref={initialRef}
-                  placeholder="Digite o nome da tecnologia"
-                  color="#F8F9FA"
-                  borderColor="#F8F9FA"
-                  mb={5}
-                  {...register("title")}
-                />
-                {errors.title?.message}
-              </FormControl>
-
               <FormControl mt={4}>
                 <FormLabel color="#F8F9FA" fontSize={12}>
                   Selecionar status
@@ -113,19 +81,37 @@ export const AddTechModal = () => {
             </ModalBody>
 
             <ModalFooter
+              display="flex"
+              justifyContent="center"
+              gap="10px"
               bg="#212529"
               borderBottomRadius="5"
             >
               <Button
                 type="submit"
+                onClick={() => handleSubmit(getId)}
                 leftIcon={<IoMdBuild />}
-                bg="#FF577F"
-                borderColor="#FF577F"
+                bg="#59323F"
+                borderColor="#59323F"
                 color="#F8F9FA"
-                w="259.9px"
+                w="195px"
                 _hover={{ bg: "#FF427F" }}
+                transition="0.5s ease"
               >
-                Cadastrar Tecnologia
+                Editar
+              </Button>
+
+              <Button
+                type="submit"
+                bg="#868E96"
+                borderColor="#868E96"
+                color="#F8F9FA"
+                w="98px"
+                _hover={{ bg: "#343B41" }}
+                transition="0.5s ease"
+                onClick={() => handleDeleteTeach(getId)}
+              >
+                Deletar
               </Button>
             </ModalFooter>
           </form>
