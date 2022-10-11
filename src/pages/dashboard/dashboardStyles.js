@@ -8,8 +8,11 @@ export const HeaderDash = styled.div`
   padding: 20px;
 
   @media (min-width: 767px) {
-    justify-content: space-evenly;
+    justify-content: space-between;
+    width: 500px;
     margin: 0 auto;
+    padding-top: 50px;
+    padding-bottom: 0;
   }
 
   h1 {
@@ -65,7 +68,8 @@ export const Container = styled.div`
 
       @media (min-width: 767px) {
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: space-between;
+        width: 500px;
         margin: 10px auto;
       }
 
@@ -85,16 +89,28 @@ export const Container = styled.div`
     }
   }
 
-  div {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
+  .tecnologias {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
     margin: 0 auto;
     gap: 20px;
 
-    @media (min-width: 767px) {
+    button {
       display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      background-color: ${Colors.gray3};
+      font-size: 20px;
+      border-radius: 5px;
+    }
+
+    @media (min-width: 767px) {
+      justify-content: space-between;
+      width: 500px;
     }
 
     h3 {
@@ -109,6 +125,57 @@ export const Container = styled.div`
       font-size: 0.9rem;
       line-height: 1.4rem;
       color: ${Colors.text.white};
+    }
+  }
+`;
+
+export const ContainerTecs = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 95%;
+  height: max-content;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 3px;
+  background-color: ${Colors.gray2};
+
+  @media (min-width: 767px) {
+    width: 500px;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 48.73px;
+    padding: 10px;
+    background-color: ${Colors.gray1};
+    transition: 0.3s ease;
+
+    &:hover {
+      background-color: ${Colors.gray3};
+    }
+
+    p {
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 24px;
+      color: ${Colors.text.gray0};
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      span {
+        font-weight: 400;
+        font-size: 0.9rem;
+        line-height: 22px;
+        color: ${Colors.text.gray1};
+      }
     }
   }
 `;

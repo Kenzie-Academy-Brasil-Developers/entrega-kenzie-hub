@@ -1,34 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { IoIosAdd } from "react-icons/io";
+import { BsTrash } from "react-icons/bs";
 import { Navigate, useNavigate } from "react-router-dom";
 
 // Utilities
-import { api } from "../../services/api";
 import { UserContext } from "../../context/UserContext";
 
 // Components
 import { CustonButton } from "../../components/CustomButton/CustonButton";
-
-// Styles
-import { Container, HeaderDash } from "./dashboardStyles";
 import { CustomModal } from "../../components/CustomModal/CustomModal";
 
-export const Dashboard = () => {
-  const [getProfile, setGetProfile] = useState([]);
+// Styles
+import {
+  Container,
+  ContainerTecs,
+  HeaderDash,
+} from "./dashboardStyles";
+import { TechContext } from "../../context/TachContext";
 
-  const { newUser } = useContext(UserContext);
+export const Dashboard = () => {
+  const { newUser, getProfile, getTecs } =
+    useContext(UserContext);
+
+  const { onOpen, handleDeleteTeach } =
+    useContext(TechContext);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    api
-      .get("/profile")
-      .then((response) => {
-        window.localStorage.getItem("KenzieHub:token");
-        setGetProfile([response.data]);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   const goLogin = () => {
     window.localStorage.clear();
@@ -57,20 +55,35 @@ export const Dashboard = () => {
                 </li>
               ))}
             </ul>
-            <div>
-              <h3>
-                Que pena! Estamos em desenvolvimento :(
-              </h3>
-              <span>
-                Nossa aplicação está em desenvolvimento, em
-                breve teremos novidades
-              </span>
+            <div className="tecnologias">
+              <h3>Tecnologias</h3>
+              <button onClick={onOpen}>
+                <IoIosAdd size={20} color="#F8F9FA" />
+              </button>
             </div>
           </Container>
+          <ContainerTecs>
+            {getTecs.map((item) => (
+              <li key={item.id}>
+                <p>{item.title}</p>
+                <div className="status">
+                  <span>{item.status}</span>
+                  <button
+                    onClick={() =>
+                      handleDeleteTeach(item.id)
+                    }
+                  >
+                    <BsTrash size={15} color="#868E96" />
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ContainerTecs>
         </>
       ) : (
-        <Navigate to="/register" replace />
+        <Navigate to="/" replace />
       )}
+      <CustomModal />
     </>
   );
 };
