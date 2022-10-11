@@ -102,7 +102,7 @@ export const PatchTechModal = () => {
               </Button>
 
               <Button
-                type="submit"
+                type="button"
                 bg="#868E96"
                 borderColor="#868E96"
                 color="#F8F9FA"
