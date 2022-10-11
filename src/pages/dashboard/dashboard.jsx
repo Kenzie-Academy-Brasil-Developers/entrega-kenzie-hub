@@ -20,8 +20,7 @@ import {
 import { TechContext } from "../../context/TachContext";
 
 export const Dashboard = () => {
-  const { newUser, getProfile, getTecs } =
-    useContext(UserContext);
+  const { getProfile, getTecs } = useContext(UserContext);
 
   const { onOpen, handleDeleteTeach } =
     useContext(TechContext);
@@ -32,10 +31,9 @@ export const Dashboard = () => {
     window.localStorage.clear();
     navigate("/");
   };
-
   return (
     <>
-      {newUser ? (
+      {getProfile ? (
         <>
           <HeaderDash>
             <h1>Kenzie Hub</h1>

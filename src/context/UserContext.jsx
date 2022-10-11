@@ -91,14 +91,17 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const profile = async () => {
-      try {
-        const response = await api.get("/profile");
+      const token = localStorage.getItem("KenzieHub:token");
 
-        window.localStorage.getItem("KenzieHub:token");
-        setGetProfile([response.data]);
-        setGetTecs(response.data.techs);
-      } catch (error) {
-        console.log(error);
+      if (token) {
+        try {
+          const response = await api.get("/profile");
+
+          setGetProfile([response.data]);
+          setGetTecs(response.data.techs);
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
     return profile;
