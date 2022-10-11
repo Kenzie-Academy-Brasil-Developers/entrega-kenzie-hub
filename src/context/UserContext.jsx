@@ -12,14 +12,6 @@ export const UserProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const goSignUp = () => {
-    navigate("/register");
-  };
-
-  const goHome = () => {
-    navigate("/login");
-  };
-
   const handleForm = async (data) => {
     try {
       const response = await api.post("/sessions", {
@@ -115,10 +107,8 @@ export const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        goSignUp,
         handleForm,
         onSubmit,
-        goHome,
         newUser,
         getProfile,
         getTecs,

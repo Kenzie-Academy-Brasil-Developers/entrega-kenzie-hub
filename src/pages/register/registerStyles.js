@@ -15,24 +15,26 @@ export const HeaderRegister = styled.div`
     line-height: 1rem;
     color: ${Colors.primary};
   }
+`;
 
-  button {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 10px;
-    width: 100px;
-    height: 31.95px;
-    background-color: ${Colors.gray3};
-    border: 1px solid ${Colors.gray3};
-    border-radius: 4px;
-    font-size: 0.8rem;
-    line-height: 1.2rem;
-    font-weight: 600;
-    color: ${Colors.text.gray0};
-    transition: 0.8s ease;
-  }
+export const DivBackLogin = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  width: 100px;
+  height: 31.95px;
+  background-color: ${Colors.gray3};
+  border: 1px solid ${Colors.gray3};
+  border-radius: 4px;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  font-weight: 600;
+  color: ${Colors.text.gray0};
+  transition: 0.8s ease;
+  cursor: pointer;
 
-  button:hover {
+  :hover {
     background-color: ${Colors.gray4};
     border: 1px solid ${Colors.gray4};
   }

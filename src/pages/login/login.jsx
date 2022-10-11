@@ -19,7 +19,7 @@ import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
 import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const { handleForm, goSignUp } = useContext(UserContext);
+  const { handleForm } = useContext(UserContext);
 
   const loginScheme = yup.object().shape({
     email: yup

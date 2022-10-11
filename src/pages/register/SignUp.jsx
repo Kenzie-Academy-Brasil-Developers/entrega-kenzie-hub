@@ -12,10 +12,15 @@ import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomLabel } from "../../components/CustomLabels/CustomLabels";
 
 // Styles
-import { DivForm, HeaderRegister } from "./registerStyles";
+import {
+  DivBackLogin,
+  DivForm,
+  HeaderRegister,
+} from "./registerStyles";
 import "react-toastify/dist/ReactToastify.css";
 import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
 import { UserContext } from "../../context/UserContext";
+import { Link } from "react-router-dom";
 
 export const SignUp = () => {
   const formSchema = yup.object().shape({
@@ -106,18 +111,16 @@ export const SignUp = () => {
 
   const watchPassword = watch("password");
 
-  const { onSubmit, goHome } = useContext(UserContext);
+  const { onSubmit } = useContext(UserContext);
 
   return (
     <>
       <HeaderRegister>
         <h1>Kenzie Hub</h1>
-        <CustonButton
-          onClick={() => goHome()}
-          startIcon={<RiLogoutBoxLine size={16} />}
-        >
-          Voltar
-        </CustonButton>
+        <DivBackLogin>
+          <RiLogoutBoxLine size={16} />
+          <Link to={"/login"}>Voltar</Link>
+        </DivBackLogin>
       </HeaderRegister>
 
       <DivForm onSubmit={handleSubmit(onSubmit)}>
