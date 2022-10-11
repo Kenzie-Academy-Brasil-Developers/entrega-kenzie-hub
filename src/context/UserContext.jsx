@@ -1,17 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 // Utilities
 import { api } from "../services/api";
-import { useForm } from "react-hook-form";
 
 export const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
   const [newUser, setNewUser] = useState(null);
-
-  const { reset } = useForm();
 
   const navigate = useNavigate();
 
@@ -69,7 +66,7 @@ export const UserProvider = ({ children }) => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await api.post("/users", data);
+      await api.post("/users", data);
       toast.success("Conta criada com sucesso!", {
         position: "top-right",
         autoClose: 5000,
@@ -97,6 +94,24 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const [getProfile, setGetProfile] = useState([]);
+  const [getTecs, setGetTecs] = useState([]);
+
+  useEffect(() => {
+    const profile = async () => {
+      try {
+        const response = await api.get("/profile");
+
+        window.localStorage.getItem("KenzieHub:token");
+        setGetProfile([response.data]);
+        setGetTecs(response.data.techs);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    return profile;
+  }, []);
+
   return (
     <UserContext.Provider
       value={{
@@ -105,6 +120,9 @@ export const UserProvider = ({ children }) => {
         onSubmit,
         goHome,
         newUser,
+        getProfile,
+        getTecs,
+        setGetTecs,
       }}
     >
       {children}
