@@ -25,7 +25,7 @@ import { TechContext } from "../../context/TachContext";
 import { InputErrorMessage } from "../errorMessage/errorMessage";
 
 // Styles
-import { DivModal } from "./ModalStyles";
+import { DivModal, Options } from "./ModalStyles";
 
 export const CustomModal = () => {
   const techSchema = yup.object().shape({
@@ -99,13 +99,15 @@ export const CustomModal = () => {
                   color="#F8F9FA"
                   {...register("status")}
                 >
-                  <option value="Iniciante">
+                  <Options value="Iniciante">
                     Iniciante
-                  </option>
-                  <option value="Intermediário">
+                  </Options>
+                  <Options value="Intermediário">
                     Intermediário
-                  </option>
-                  <option value="Avançado">Avançado</option>
+                  </Options>
+                  <Options value="Avançado">
+                    Avançado
+                  </Options>
                 </Select>
               </FormControl>
             </ModalBody>
