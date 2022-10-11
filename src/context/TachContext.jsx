@@ -52,7 +52,6 @@ export const TechProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-    console.log(id);
   };
 
   return (

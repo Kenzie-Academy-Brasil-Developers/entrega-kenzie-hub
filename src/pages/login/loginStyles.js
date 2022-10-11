@@ -35,20 +35,6 @@ export const DivForm = styled.div`
     color: ${Colors.text.gray1};
   }
 
-  button:nth-child(3) {
-    background-color: ${Colors.gray4};
-    border: 1px solid ${Colors.gray4};
-    color: ${Colors.text.gray0};
-    font-size: 0.8rem;
-    font-weight: 500;
-    line-height: 1.1rem;
-    transition: 1s ease;
-  }
-
-  button:nth-child(3):hover {
-    background-color: ${Colors.gray3};
-  }
-
   form {
     display: flex;
     flex-direction: column;
@@ -77,5 +63,26 @@ export const DivForm = styled.div`
       background-color: ${Colors.primaryHover};
       border: 1px solid ${Colors.primaryHover};
     }
+  }
+`;
+
+export const DivLink = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 260px;
+  height: 39px;
+  background-color: ${Colors.gray4};
+  border: 1px solid ${Colors.gray4};
+  border-radius: 5px;
+  color: ${Colors.text.gray0};
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.1rem;
+  transition: 1s ease;
+  cursor: pointer;
+
+  :hover {
+    background-color: ${Colors.gray3};
   }
 `;

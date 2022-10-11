@@ -1,5 +1,9 @@
 import { useContext } from "react";
-import { DivContainer, DivForm } from "./loginStyles";
+import {
+  DivContainer,
+  DivForm,
+  DivLink,
+} from "./loginStyles";
 import { FiLogIn } from "react-icons/fi";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -12,6 +16,7 @@ import { CustomLabel } from "../../components/CustomLabels/CustomLabels";
 import { UserContext } from "../../context/UserContext";
 
 import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   const { handleForm, goSignUp } = useContext(UserContext);
@@ -77,9 +82,9 @@ export const Login = () => {
           </CustonButton>
         </form>
         <span>Ainda não possui uma conta?</span>
-        <CustonButton onClick={() => goSignUp()}>
-          Cadastre-se
-        </CustonButton>
+        <DivLink>
+          <Link to={"/register"}>Cadastre-se</Link>
+        </DivLink>
       </DivForm>
     </DivContainer>
   );
