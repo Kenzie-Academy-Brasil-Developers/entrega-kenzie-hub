@@ -46,9 +46,7 @@ export const TechProvider = ({ children }) => {
 
   const handleDeleteTeach = async (id) => {
     try {
-      const response = await api.delete(
-        `/users/techs/${id}`
-      );
+      await api.delete(`/users/techs/${id}`);
     } catch (error) {
       console.log(error);
     }

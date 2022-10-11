@@ -102,7 +102,7 @@ export const UserProvider = ({ children }) => {
       }
     };
     return profile;
-  }, []);
+  }, [getTecs, getProfile]);
 
   return (
     <UserContext.Provider
