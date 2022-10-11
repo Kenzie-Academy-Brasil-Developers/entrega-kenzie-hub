@@ -27,7 +27,7 @@ import { InputErrorMessage } from "../errorMessage/errorMessage";
 // Styles
 import { DivModal, Options } from "./ModalStyles";
 
-export const CustomModal = () => {
+export const AddTechModal = () => {
   const techSchema = yup.object().shape({
     title: yup
       .string()

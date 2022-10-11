@@ -9,7 +9,7 @@ import { UserContext } from "../../context/UserContext";
 
 // Components
 import { CustonButton } from "../../components/CustomButton/CustonButton";
-import { CustomModal } from "../../components/CustomModal/CustomModal";
+import { AddTechModal } from "../../components/CustomModal/AddTechModal";
 
 // Styles
 import {
@@ -81,7 +81,7 @@ export const Dashboard = () => {
       ) : (
         <Navigate to="/" replace />
       )}
-      <CustomModal />
+      <AddTechModal />
     </>
   );
 };
