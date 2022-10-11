@@ -9,6 +9,7 @@ import { App } from "./App";
 
 import "./index.css";
 import { TechProvider } from "./context/TachContext";
+import { WorksProvider } from "./context/WorksContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -16,13 +17,15 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
-        <ChakraProvider>
+      <ChakraProvider>
+        <UserProvider>
           <TechProvider>
-            <App />
+            <WorksProvider>
+              <App />
+            </WorksProvider>
           </TechProvider>
-        </ChakraProvider>
-      </UserProvider>
+        </UserProvider>
+      </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

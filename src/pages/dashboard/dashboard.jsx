@@ -17,8 +17,10 @@ import { PatchTechModal } from "../../components/CustomModal/PatchTechModal";
 import {
   Container,
   ContainerTecs,
+  ContainerWorks,
   HeaderDash,
 } from "./dashboardStyles";
+import { WorksContext } from "../../context/WorksContext";
 
 export const Dashboard = () => {
   const { getProfile, getTecs } = useContext(UserContext);
@@ -29,6 +31,8 @@ export const Dashboard = () => {
     onOpenTech,
     setGetId,
   } = useContext(TechContext);
+
+  const { getWork } = useContext(WorksContext);
 
   const navigate = useNavigate();
 
@@ -86,6 +90,38 @@ export const Dashboard = () => {
               </li>
             ))}
           </ContainerTecs>
+          <ContainerWorks>
+            <div className="headerWorks">
+              <h2>Trabalhos</h2>
+              <button>
+                <IoIosAdd size={20} color="#F8F9FA" />
+              </button>
+            </div>
+            {!getWork ? (
+              <h3>
+                Ainda não possuí trabalhos para exibir
+              </h3>
+            ) : (
+              <ul>
+                {getWork.map((work) => (
+                  <li key={work.id}>
+                    <div className="content">
+                      <h3>{work.title}</h3>
+                      <p>{work.description}</p>
+                    </div>
+                    <a
+                      className="link"
+                      href={work.deploy_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Visite o site
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </ContainerWorks>
         </>
       ) : (
         <Navigate to="/" replace />

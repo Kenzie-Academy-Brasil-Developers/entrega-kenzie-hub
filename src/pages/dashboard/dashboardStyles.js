@@ -93,7 +93,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 95%;
     margin: 0 auto;
     gap: 20px;
 
@@ -176,6 +176,109 @@ export const ContainerTecs = styled.ul`
         font-size: 0.9rem;
         line-height: 22px;
         color: ${Colors.text.gray1};
+      }
+    }
+  }
+`;
+
+export const ContainerWorks = styled.div`
+  width: 100%;
+  padding-bottom: 10px;
+  height: max-content;
+
+  .headerWorks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
+    padding-top: 20px;
+    gap: 20px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      background-color: ${Colors.gray3};
+      font-size: 20px;
+      border-radius: 5px;
+    }
+
+    @media (min-width: 767px) {
+      justify-content: space-between;
+      width: 500px;
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.2rem;
+      color: ${Colors.text.gray0};
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 95%;
+    height: max-content;
+    margin: 30px auto;
+    padding: 8px;
+    border-radius: 3px;
+    background-color: ${Colors.gray2};
+
+    @media (min-width: 767px) {
+      width: 500px;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      height: max-content;
+      padding: 10px;
+      background-color: ${Colors.gray1};
+      transition: 0.3s ease;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 60%;
+        gap: 10px;
+
+        h3 {
+          font-weight: 700;
+          font-size: 1.1rem;
+          line-height: 1.2rem;
+          color: ${Colors.text.gray0};
+        }
+
+        p {
+          align-self: flex-start;
+          font-weight: 400;
+          font-size: 0.9rem;
+          line-height: 22px;
+          color: ${Colors.text.gray1};
+        }
+      }
+      a {
+        font-weight: 400;
+        font-size: 0.9rem;
+        line-height: 22px;
+        padding: 2px;
+        color: ${Colors.text.gray1};
+        transition: 0.5s ease;
+
+        :hover {
+          color: ${Colors.gray5};
+          text-decoration: underline;
+        }
       }
     }
   }
