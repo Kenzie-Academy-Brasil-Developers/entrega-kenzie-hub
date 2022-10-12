@@ -147,6 +147,7 @@ export const DivListDevs = styled.div`
 
   ul {
     display: flex;
+    justify-content: flex-start;
     max-width: 320px;
     width: 100%;
     height: 350px;
@@ -156,6 +157,7 @@ export const DivListDevs = styled.div`
     overflow-x: auto;
 
     @media (min-width: 1000px) {
+      flex-direction: column;
       flex-wrap: wrap;
       width: 90%;
       max-width: 100%;
@@ -181,6 +183,7 @@ export const DivListDevs = styled.div`
       }
 
       h2 {
+        text-align: center;
         font-weight: 700;
         font-size: 1.2rem;
         line-height: 1.5rem;
@@ -196,6 +199,7 @@ export const DivListDevs = styled.div`
       }
 
       p {
+        text-align: center;
         font-weight: 400;
         font-size: 0.9rem;
         line-height: 1.2rem;
@@ -203,6 +207,7 @@ export const DivListDevs = styled.div`
       }
 
       span {
+        text-align: center;
         font-weight: 400;
         font-size: 0.8rem;
         line-height: 1.2rem;

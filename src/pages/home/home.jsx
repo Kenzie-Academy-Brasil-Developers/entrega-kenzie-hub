@@ -25,13 +25,13 @@ export const HomePage = () => {
       <DivHeader>
         <h1>Kenzie Hub</h1>
         <div className="routes">
-          <div className="navigation">
-            <Link to={"/login"}>Login</Link>{" "}
-          </div>
-          <div className="navigation">
-            {" "}
-            <Link to={"/register"}> Cadastro</Link>
-          </div>
+          <Link to={"/login"}>
+            <div className="navigation">Login</div>
+          </Link>
+
+          <Link to={"/register"}>
+            <div className="navigation">Cadastro</div>
+          </Link>
         </div>
       </DivHeader>
       <DivSearch>

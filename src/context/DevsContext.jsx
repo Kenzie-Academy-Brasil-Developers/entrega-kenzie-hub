@@ -21,7 +21,7 @@ export const DevsProvider = ({ children }) => {
     const getDevs = async () => {
       try {
         const response = await api.get(
-          `/users?perPage=12&page=${isPage}&tech=React`
+          `/users?perPage=8&page=${isPage}`
         );
 
         setIsDevs(response.data);
