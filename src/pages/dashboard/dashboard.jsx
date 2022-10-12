@@ -21,6 +21,7 @@ import {
   HeaderDash,
 } from "./dashboardStyles";
 import { WorksContext } from "../../context/WorksContext";
+import { AddWorkModal } from "../../components/CustomModal/AddWorkModal";
 
 export const Dashboard = () => {
   const { getProfile, getTecs } = useContext(UserContext);
@@ -32,7 +33,8 @@ export const Dashboard = () => {
     setGetId,
   } = useContext(TechContext);
 
-  const { getWork } = useContext(WorksContext);
+  const { getWork, onOpenNewWork } =
+    useContext(WorksContext);
 
   const navigate = useNavigate();
 
@@ -93,7 +95,7 @@ export const Dashboard = () => {
           <ContainerWorks>
             <div className="headerWorks">
               <h2>Trabalhos</h2>
-              <button>
+              <button onClick={onOpenNewWork}>
                 <IoIosAdd size={20} color="#F8F9FA" />
               </button>
             </div>
@@ -128,6 +130,7 @@ export const Dashboard = () => {
       )}
       <AddTechModal />
       <PatchTechModal />
+      <AddWorkModal />
     </>
   );
 };
