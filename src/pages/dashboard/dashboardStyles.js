@@ -5,7 +5,8 @@ export const HeaderDash = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 8px;
+  padding-top: 20px;
 
   @media (min-width: 767px) {
     justify-content: space-between;
@@ -242,7 +243,12 @@ export const ContainerWorks = styled.div`
       height: max-content;
       padding: 10px;
       background-color: ${Colors.gray1};
-      transition: 0.3s ease;
+      transition: 0.4s ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: ${Colors.gray3};
+      }
 
       .content {
         display: flex;
