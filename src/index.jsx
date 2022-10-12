@@ -4,12 +4,13 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/UserContext";
 import { ChakraProvider } from "@chakra-ui/react";
+import { TechProvider } from "./context/TachContext";
+import { WorksProvider } from "./context/WorksContext";
 
 import { App } from "./App";
 
 import "./index.css";
-import { TechProvider } from "./context/TachContext";
-import { WorksProvider } from "./context/WorksContext";
+import { DevsProvider } from "./context/DevsContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root")
@@ -18,13 +19,15 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ChakraProvider>
-        <UserProvider>
-          <TechProvider>
-            <WorksProvider>
-              <App />
-            </WorksProvider>
-          </TechProvider>
-        </UserProvider>
+        <DevsProvider>
+          <UserProvider>
+            <TechProvider>
+              <WorksProvider>
+                <App />
+              </WorksProvider>
+            </TechProvider>
+          </UserProvider>
+        </DevsProvider>
       </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>

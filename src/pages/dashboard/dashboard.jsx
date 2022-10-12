@@ -48,7 +48,7 @@ export const Dashboard = () => {
 
   const goLogin = () => {
     window.localStorage.clear();
-    navigate("/");
+    navigate("/login");
   };
   return (
     <>
