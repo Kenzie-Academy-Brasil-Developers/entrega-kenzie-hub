@@ -28,10 +28,29 @@ export const WorksProvider = ({ children }) => {
 
   const newWork = (data) => {
     try {
-      api.post("/users/works");
-      toast.success("Novo Trabalho");
+      api.post("/users/works", data);
+      toast.success("Projeto adicionado com sucesso!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
-      toast.error("Algo deu errado");
+      toast.error(
+        "Ops, algo deu errado, confira os dados e tente novamente!",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
       console.log(error);
     }
   };

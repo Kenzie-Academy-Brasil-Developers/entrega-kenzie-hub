@@ -28,12 +28,26 @@ export const AddWorkModal = () => {
   const { newWork, isOpenNewWork, onCloseNewWork } =
     useContext(WorksContext);
 
-  const techSchema = yup.object().shape({
+  const workSchema = yup.object().shape({
     title: yup
       .string()
       .required(
         <InputErrorMessage>
-          Nome da técnologia obrigatório
+          Nome do projeto obrigatório
+        </InputErrorMessage>
+      ),
+    description: yup
+      .string()
+      .required(
+        <InputErrorMessage>
+          Descrição do projeto obrigatório
+        </InputErrorMessage>
+      ),
+    deploy_url: yup
+      .string()
+      .required(
+        <InputErrorMessage>
+          Link do projeto obrigatório
         </InputErrorMessage>
       ),
   });
@@ -43,7 +57,7 @@ export const AddWorkModal = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(techSchema),
+    resolver: yupResolver(workSchema),
   });
 
   const initialRef = useRef(null);
@@ -70,7 +84,7 @@ export const AddWorkModal = () => {
 
           <ModalCloseButton color="#F8F9FA" />
 
-          <form>
+          <form onSubmit={handleSubmit(newWork)}>
             <ModalBody pb={6} bg="#212529">
               <FormControl>
                 <FormLabel color="#F8F9FA" fontSize={12}>
@@ -80,7 +94,10 @@ export const AddWorkModal = () => {
                   ref={initialRef}
                   placeholder="Titulo do projeto"
                   color="#F8F9FA"
+                  marginBottom="12px"
+                  {...register("title")}
                 />
+                {errors.title?.message}
               </FormControl>
 
               <FormControl mt={4}>
@@ -90,7 +107,10 @@ export const AddWorkModal = () => {
                 <Input
                   placeholder="Descreva seu projeto"
                   color="#F8F9FA"
+                  marginBottom="12px"
+                  {...register("description")}
                 />
+                {errors.description?.message}
               </FormControl>
 
               <FormControl mt={4}>
@@ -100,7 +120,10 @@ export const AddWorkModal = () => {
                 <Input
                   placeholder="Comparilhe o link do seu projeto"
                   color="#F8F9FA"
+                  marginBottom="12px"
+                  {...register("deploy_url")}
                 />
+                {errors.deploy_url?.message}
               </FormControl>
             </ModalBody>
 
