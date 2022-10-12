@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { BsTrash } from "react-icons/bs";
+import { AiOutlineEdit } from "react-icons/ai";
 import { Navigate, useNavigate } from "react-router-dom";
 
 // Utilities
@@ -23,9 +24,11 @@ import {
   ContainerWorks,
   HeaderDash,
 } from "./dashboardStyles";
+import { EditProfileModal } from "../../components/CustomModal/EditProfileModal";
 
 export const Dashboard = () => {
-  const { getProfile, getTecs } = useContext(UserContext);
+  const { getProfile, getTecs, onOpenEditProfile } =
+    useContext(UserContext);
 
   const {
     onOpenAdd,
@@ -64,8 +67,16 @@ export const Dashboard = () => {
             <ul>
               {getProfile.map((item) => (
                 <li key={item.id}>
-                  <h2>Olá, {item.name}</h2>
-                  <p>{item.course_module}</p>
+                  <div className="userData">
+                    <h2>Olá, {item.name}</h2>
+                    <p>{item.course_module}</p>
+                  </div>
+                  <CustonButton
+                    startIcon={<AiOutlineEdit size={16} />}
+                    onClick={onOpenEditProfile}
+                  >
+                    Editar
+                  </CustonButton>
                 </li>
               ))}
             </ul>
@@ -143,6 +154,7 @@ export const Dashboard = () => {
       <PatchTechModal />
       <AddWorkModal />
       <PutWorkModal />
+      <EditProfileModal />
     </>
   );
 };

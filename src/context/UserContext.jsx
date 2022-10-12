@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useDisclosure } from "@chakra-ui/react";
 
 // Utilities
 import { api } from "../services/api";
@@ -11,6 +12,12 @@ export const UserProvider = ({ children }) => {
   const [newUser, setNewUser] = useState(null);
 
   const navigate = useNavigate();
+
+  const {
+    isOpen: isOpenEditProfile,
+    onOpen: onOpenEditProfile,
+    onClose: onCloseEditProfile,
+  } = useDisclosure();
 
   const handleForm = async (data) => {
     try {
@@ -107,6 +114,36 @@ export const UserProvider = ({ children }) => {
     return profile;
   }, [getTecs, getProfile]);
 
+  const handleEditProfile = async (data) => {
+    try {
+      await api.put("/profile", data);
+
+      toast.success("Usuario editado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      toast.error(
+        "Ops, algo deu errado, confira os dados e tente novamente!",
+        {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+      console.log(error);
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -116,6 +153,10 @@ export const UserProvider = ({ children }) => {
         getProfile,
         getTecs,
         setGetTecs,
+        isOpenEditProfile,
+        onCloseEditProfile,
+        onOpenEditProfile,
+        handleEditProfile,
       }}
     >
       {children}

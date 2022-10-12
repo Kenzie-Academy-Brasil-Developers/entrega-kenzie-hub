@@ -5,7 +5,7 @@ export const HeaderDash = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 9px;
   padding-top: 20px;
 
   @media (min-width: 767px) {
@@ -63,9 +63,9 @@ export const Container = styled.div`
 
     li {
       display: flex;
-      flex-direction: column;
       gap: 10px;
       width: 100%;
+      height: 80px;
 
       @media (min-width: 767px) {
         flex-direction: row;
@@ -74,18 +74,40 @@ export const Container = styled.div`
         margin: 10px auto;
       }
 
-      h2 {
-        font-weight: 700;
-        font-size: 1.2rem;
-        line-height: 1.5rem;
-        color: ${Colors.text.gray0};
+      .userData {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        h2 {
+          font-weight: 700;
+          font-size: 1.2rem;
+          line-height: 1.5rem;
+          color: ${Colors.text.gray0};
+        }
+
+        p {
+          font-weight: 400;
+          font-size: 0.8rem;
+          line-height: 1.2rem;
+          color: ${Colors.text.gray1};
+        }
       }
 
-      p {
-        font-weight: 400;
-        font-size: 0.8rem;
-        line-height: 1.2rem;
-        color: ${Colors.text.gray1};
+      button {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 90px;
+        height: 32px;
+        margin-right: 5px;
+        padding: 0;
+        background-color: ${Colors.gray2};
+
+        color: ${Colors.text.gray0};
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: 1.25rem;
       }
     }
   }
