@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CustonButton } from "../../components/CustomButton/CustonButton";
 
@@ -14,23 +15,27 @@ import {
   DivListDevs,
   DivSearch,
 } from "./homeStyles";
-import { Link } from "react-router-dom";
 
 export const HomePage = () => {
-  const { handleNextPage, handlePreviusPage, isDevs } =
-    useContext(DevsContext);
+  const {
+    handleNextPage,
+    handlePreviusPage,
+    isDevs,
+    getDevProfile,
+  } = useContext(DevsContext);
 
   return (
     <>
       <DivHeader>
         <h1>Kenzie Hub</h1>
+
         <div className="routes">
           <Link to={"/login"}>
-            <div className="navigation">Login</div>
+            <div>Login</div>
           </Link>
 
           <Link to={"/register"}>
-            <div className="navigation">Cadastro</div>
+            <div>Cadastro</div>
           </Link>
         </div>
       </DivHeader>
@@ -49,14 +54,17 @@ export const HomePage = () => {
       <DivListDevs>
         <ul>
           {isDevs.map((item) => (
-            <li key={item.id}>
-              <h2>{item.name}</h2>
-              <h3>{item.bio}</h3>
-              <p>{item.contact}</p>
-              <span>{item.course_module}</span>
-            </li>
+            <Link to={`/users/${item.name}`} key={item.id}>
+              <li onClick={() => getDevProfile(item.id)}>
+                <h2>{item.name}</h2>
+                <h3>{item.bio}</h3>
+                <p>{item.contact}</p>
+                <span>{item.course_module}</span>
+              </li>
+            </Link>
           ))}
         </ul>
+
         <div className="listPages">
           <CustonButton onClick={handlePreviusPage}>
             Anterior
