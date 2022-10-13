@@ -38,7 +38,7 @@ export const DivHeader = styled.div`
       justify-content: space-around;
     }
 
-    .navigation {
+    a:nth-child(1) {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -48,25 +48,31 @@ export const DivHeader = styled.div`
       color: ${Colors.text.gray0};
       cursor: pointer;
       transition: 0.5s ease;
+      background-color: ${Colors.primary};
+      border: 2px solid ${Colors.primary};
 
-      :nth-child(1) {
-        background-color: ${Colors.primary};
-        border: 2px solid ${Colors.primary};
-
-        :hover {
-          background-color: ${Colors.primaryNegative};
-          border: 2px solid ${Colors.primaryNegative};
-        }
+      :hover {
+        background-color: ${Colors.primaryNegative};
+        border: 2px solid ${Colors.primaryNegative};
       }
+    }
 
-      :nth-child(2) {
-        background-color: ${Colors.gray4};
-        border: 2px solid ${Colors.gray4};
+    a:nth-child(2) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 40px;
+      border-radius: 5px;
+      color: ${Colors.text.gray0};
+      cursor: pointer;
+      transition: 0.5s ease;
+      background-color: ${Colors.gray4};
+      border: 2px solid ${Colors.gray4};
 
-        :hover {
-          background-color: ${Colors.gray3};
-          border: 2px solid ${Colors.gray3};
-        }
+      :hover {
+        background-color: ${Colors.gray3};
+        border: 2px solid ${Colors.gray3};
       }
     }
   }
@@ -176,6 +182,7 @@ export const DivListDevs = styled.div`
       padding: 10px;
       background-color: ${Colors.gray3};
       border-radius: 4px;
+      cursor: pointer;
 
       @media (min-width: 1000px) {
         width: 300px;
