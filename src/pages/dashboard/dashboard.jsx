@@ -3,7 +3,11 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import { IoIosAdd } from "react-icons/io";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
-import { Navigate, useNavigate } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 
 // Utilities
 import { UserContext } from "../../context/UserContext";
@@ -55,7 +59,9 @@ export const Dashboard = () => {
       {getProfile ? (
         <>
           <HeaderDash>
-            <h1>Kenzie Hub</h1>
+            <h1>
+              <Link to={"/home"}> Kenzie Hub</Link>
+            </h1>
             <CustonButton
               onClick={() => goLogin()}
               startIcon={<RiLogoutBoxLine size={16} />}

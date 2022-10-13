@@ -53,7 +53,9 @@ export const Login = () => {
 
   return (
     <DivContainer>
-      <h1>Kenzie Hub</h1>
+      <Link to={"/home"}>
+        <h1>Kenzie Hub</h1>
+      </Link>
 
       <DivForm>
         <form onSubmit={handleSubmit(handleForm)}>
