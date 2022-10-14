@@ -75,7 +75,7 @@ export const UserProvider = ({ children }) => {
         draggable: true,
         progress: undefined,
       });
-      navigate("/", { replace: true });
+      navigate("/login", { replace: true });
     } catch (error) {
       toast.error(
         "Ops, algo deu errado, confira os dados e tente novamente!",
