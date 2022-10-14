@@ -1,4 +1,3 @@
-import { useDisclosure } from "@chakra-ui/react";
 import { createContext, useEffect, useState } from "react";
 
 import { api } from "../services/api";
@@ -6,13 +5,27 @@ import { api } from "../services/api";
 export const DevsContext = createContext({});
 
 export const DevsProvider = ({ children }) => {
-  const [isDevs, setIsDevs] = useState([]);
   const [isPage, setIsPage] = useState(1);
+  const [isDevs, setIsDevs] = useState([]);
   const [isDevSelect, setIsDevSelect] = useState([]);
   const [isDevTechs, setIsDevTechs] = useState([]);
   const [isDevWorks, setIsDevWorks] = useState([]);
+  const [isFilterDevs, setIsFilterDevs] = useState([]);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    const getAllDevs = async () => {
+      try {
+        const response = await api.get(
+          `/users?perPage=10000`
+        );
+
+        setIsFilterDevs(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    return getAllDevs;
+  }, [isPage]);
 
   useEffect(() => {
     const getDevs = async () => {
@@ -58,12 +71,10 @@ export const DevsProvider = ({ children }) => {
         handlePreviusPage,
         isDevs,
         isDevSelect,
-        isOpen,
-        onOpen,
-        onClose,
         getDevProfile,
         isDevTechs,
         isDevWorks,
+        isFilterDevs,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CustonButton } from "../../components/CustomButton/CustonButton";
@@ -17,12 +17,31 @@ import {
 } from "./homeStyles";
 
 export const HomePage = () => {
+  const [isFiltered, setIsFiltered] = useState("");
+
   const {
     handleNextPage,
     handlePreviusPage,
     isDevs,
     getDevProfile,
+    isFilterDevs,
   } = useContext(DevsContext);
+
+  const handleFilter = (event) => {
+    event.preventDefault();
+
+    setIsFiltered(event.target.value);
+  };
+
+  const devsFiltered = isFilterDevs.filter(
+    (item) =>
+      !isFiltered ||
+      item.name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .includes(isFiltered)
+  );
 
   return (
     <>
@@ -41,8 +60,15 @@ export const HomePage = () => {
       </DivHeader>
       <DivSearch>
         <form className="search">
-          <CustomInput placeholder={"Buscar"} />
-          <CustonButton>
+          <CustomInput
+            placeholder={"Buscar"}
+            onChange={handleFilter}
+            value={isFiltered}
+          />
+          <CustonButton
+            onClick={handleFilter}
+            type={"submit"}
+          >
             <AiOutlineSearch
               size={25}
               color={"#F8F9FA"}
@@ -53,16 +79,37 @@ export const HomePage = () => {
       </DivSearch>
       <DivListDevs>
         <ul>
-          {isDevs.map((item) => (
-            <Link to={`/users/${item.name}`} key={item.id}>
-              <li onClick={() => getDevProfile(item.id)}>
-                <h2>{item.name}</h2>
-                <h3>{item.bio}</h3>
-                <p>{item.contact}</p>
-                <span>{item.course_module}</span>
-              </li>
-            </Link>
-          ))}
+          {!isFiltered
+            ? isDevs.map((item) => (
+                <Link
+                  to={`/users/${item.name}`}
+                  key={item.id}
+                >
+                  <li
+                    onClick={() => getDevProfile(item.id)}
+                  >
+                    <h2>{item.name}</h2>
+                    <h3>{item.bio}</h3>
+                    <p>{item.contact}</p>
+                    <span>{item.course_module}</span>
+                  </li>
+                </Link>
+              ))
+            : devsFiltered.map((item) => (
+                <Link
+                  to={`/users/${item.name}`}
+                  key={item.id}
+                >
+                  <li
+                    onClick={() => getDevProfile(item.id)}
+                  >
+                    <h2>{item.name}</h2>
+                    <h3>{item.bio}</h3>
+                    <p>{item.contact}</p>
+                    <span>{item.course_module}</span>
+                  </li>
+                </Link>
+              ))}
         </ul>
 
         <div className="listPages">
