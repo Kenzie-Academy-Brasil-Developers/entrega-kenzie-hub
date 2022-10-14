@@ -56,7 +56,7 @@ export const Dashboard = () => {
   };
   return (
     <>
-      {getProfile ? (
+      {getProfile.length ? (
         <>
           <HeaderDash>
             <h1>
@@ -154,7 +154,7 @@ export const Dashboard = () => {
           </ContainerWorks>
         </>
       ) : (
-        <Navigate to="/" replace />
+        <Navigate to="/login" replace />
       )}
       <AddTechModal />
       <PatchTechModal />
