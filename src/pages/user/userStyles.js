@@ -200,6 +200,7 @@ export const DevContainer = styled.div`
 
   .works {
     display: flex;
+    width: 100%;
     padding: 10px;
     margin-top: 20px;
 
@@ -232,6 +233,8 @@ export const DevContainer = styled.div`
       .eachWork {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        width: 100%;
 
         p {
           font-weight: 500;
@@ -245,6 +248,10 @@ export const DevContainer = styled.div`
           font-size: 0.9rem;
           line-height: 1.2rem;
           color: ${Colors.text.gray50};
+        }
+
+        a {
+          text-align: right;
         }
       }
     }
