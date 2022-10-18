@@ -72,7 +72,7 @@ export const TechProvider = ({
 
   const [getId, setGetId] = useState("");
 
-  const handleDeleteTeach = async (id: number) => {
+  const handleDeleteTeach = async (id: string) => {
     try {
       await api.delete(`/users/techs/${id}`);
       toast.success("Tecnologia removida!", {
