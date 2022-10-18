@@ -1,4 +1,7 @@
+import { SetStateAction } from "react";
+
 export interface ProfileInterface {
+  works: SetStateAction<never[]>;
   user: [
     id: string,
     name: string,
@@ -13,6 +16,16 @@ export interface ProfileInterface {
       status: string,
       created_at: string,
       updated_at: string
+    ],
+
+    works?: [
+      id: string,
+      title: string,
+      description: string,
+      deploy_url: string,
+      created_at: string,
+      updated_at: string,
+      user: [id: string]
     ]
   ];
 }

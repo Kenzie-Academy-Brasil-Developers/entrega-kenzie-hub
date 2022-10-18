@@ -9,9 +9,26 @@ import { toast } from "react-toastify";
 import { api } from "../services/api";
 import { UserContext } from "./UserContext";
 
+interface UserPropsInterface {
+  children: React.ReactNode;
+}
+
+interface NewWorkInterface {
+  title: string;
+  description: string;
+  deploy_url: string;
+}
+
+interface PutWorkInterface {
+  title: string;
+  deploy_url: string;
+}
+
 export const WorksContext = createContext({});
 
-export const WorksProvider = ({ children }) => {
+export const WorksProvider = ({
+  children,
+}: UserPropsInterface) => {
   const {
     isOpen: isOpenNewWork,
     onOpen: onOpenNewWork,
@@ -34,7 +51,7 @@ export const WorksProvider = ({ children }) => {
     getProfile.map((work) => setGetWork(work.works));
   }, [getProfile]);
 
-  const newWork = (data) => {
+  const newWork = (data: NewWorkInterface) => {
     try {
       api.post("/users/works", data);
       toast.success("Projeto adicionado com sucesso!", {
@@ -92,7 +109,7 @@ export const WorksProvider = ({ children }) => {
     }
   };
 
-  const handlePutWork = (data) => {
+  const handlePutWork = (data: PutWorkInterface) => {
     try {
       api.put(`/users/works/${getWorkId}`, data);
       toast.success("deu certo");
