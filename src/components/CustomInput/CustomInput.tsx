@@ -3,6 +3,6 @@ import { Input } from "./CustomInputStyles";
 
 export const CustomInput = React.forwardRef(
   (props, ref) => {
-    return <Input {...props} ref={ref} />;
+    return <Input {...props} ref={ref as any} />;
   }
 );
