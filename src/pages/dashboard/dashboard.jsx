@@ -54,9 +54,10 @@ export const Dashboard = () => {
     window.localStorage.clear();
     navigate("/login");
   };
+
   return (
     <>
-      {getProfile.length ? (
+      {getProfile ? (
         <>
           <HeaderDash>
             <h1>

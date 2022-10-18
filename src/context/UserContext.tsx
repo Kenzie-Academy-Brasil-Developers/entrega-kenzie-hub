@@ -6,9 +6,47 @@ import { useDisclosure } from "@chakra-ui/react";
 // Utilities
 import { api } from "../services/api";
 
+interface UserPropsInterface {
+  children: React.ReactNode;
+}
+
+interface LoginFormInterface {
+  email: string;
+  password: string;
+}
+
+interface RegisterFormInterface {
+  email: string;
+  password: string;
+  name: string;
+  bio: string;
+  contact: string;
+  couse_module: string;
+}
+
+interface EditFormInterface {
+  name: string;
+  contact: string;
+  old_password: string;
+  password: string;
+}
+
+interface ProfileInterface {
+  user: [
+    id: string,
+    name: string,
+    contact: string,
+    email: string,
+    couse_module: string,
+    token: string
+  ];
+}
+
 export const UserContext = createContext({});
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({
+  children,
+}: UserPropsInterface) => {
   const [newUser, setNewUser] = useState(null);
 
   const navigate = useNavigate();
@@ -19,7 +57,7 @@ export const UserProvider = ({ children }) => {
     onClose: onCloseEditProfile,
   } = useDisclosure();
 
-  const handleForm = async (data) => {
+  const handleForm = async (data: LoginFormInterface) => {
     try {
       const response = await api.post("/sessions", {
         ...data,
@@ -63,7 +101,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: RegisterFormInterface) => {
     try {
       await api.post("/users", data);
       toast.success("Conta criada com sucesso!", {
@@ -93,11 +131,13 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const [getProfile, setGetProfile] = useState([]);
+  const [getProfile, setGetProfile] = useState<
+    ProfileInterface[]
+  >([]);
   const [getTecs, setGetTecs] = useState([]);
 
   useEffect(() => {
-    const profile = async () => {
+    async function profile() {
       const token = localStorage.getItem("KenzieHub:token");
 
       if (token) {
@@ -110,11 +150,13 @@ export const UserProvider = ({ children }) => {
           console.log(error);
         }
       }
-    };
-    return profile;
+    }
+    profile();
   }, [getTecs, getProfile]);
 
-  const handleEditProfile = async (data) => {
+  const handleEditProfile = async (
+    data: EditFormInterface
+  ) => {
     try {
       await api.put("/profile", data);
 
