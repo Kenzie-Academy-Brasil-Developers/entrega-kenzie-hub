@@ -1,48 +1,46 @@
-import { createContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useDisclosure } from "@chakra-ui/react";
 
 // Utilities
 import { api } from "../services/api";
+import { ProfileInterface } from "../types/profileTypes";
+import {
+  EditFormInterface,
+  LoginFormInterface,
+  RegisterFormInterface,
+} from "../types/userTypes";
 
 interface UserPropsInterface {
   children: React.ReactNode;
 }
 
-interface LoginFormInterface {
-  email: string;
-  password: string;
+interface UserProviderInterface {
+  getTecs: ProfileInterface[];
+  setGetTecs: Dispatch<SetStateAction<ProfileInterface[]>>;
+  handleForm: (data: LoginFormInterface) => Promise<void>;
+  onSubmit: (data: RegisterFormInterface) => Promise<void>;
+  newUser: null | LoginFormInterface[];
+  getProfile: ProfileInterface[];
+  isOpenEditProfile: boolean;
+  onCloseEditProfile: () => void;
+  onOpenEditProfile: () => void;
+  handleEditProfile: (
+    data: EditFormInterface
+  ) => Promise<void>;
 }
 
-interface RegisterFormInterface {
-  email: string;
-  password: string;
-  name: string;
-  bio: string;
-  contact: string;
-  couse_module: string;
-}
-
-interface EditFormInterface {
-  name: string;
-  contact: string;
-  old_password: string;
-  password: string;
-}
-
-interface ProfileInterface {
-  user: [
-    id: string,
-    name: string,
-    contact: string,
-    email: string,
-    couse_module: string,
-    token: string
-  ];
-}
-
-export const UserContext = createContext({});
+export const UserContext =
+  createContext<UserProviderInterface>(
+    {} as UserProviderInterface
+  );
 
 export const UserProvider = ({
   children,
@@ -134,7 +132,9 @@ export const UserProvider = ({
   const [getProfile, setGetProfile] = useState<
     ProfileInterface[]
   >([]);
-  const [getTecs, setGetTecs] = useState([]);
+  const [getTecs, setGetTecs] = useState<
+    ProfileInterface[]
+  >([]);
 
   useEffect(() => {
     async function profile() {

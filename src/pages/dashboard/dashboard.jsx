@@ -11,7 +11,7 @@ import {
 
 // Utilities
 import { UserContext } from "../../context/UserContext";
-import { TechContext } from "../../context/TachContext";
+import { TechContext } from "../../context/TechContext";
 import { WorksContext } from "../../context/WorksContext";
 
 // Components

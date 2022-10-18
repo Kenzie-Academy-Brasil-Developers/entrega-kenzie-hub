@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 
 // Utilities
-import { TechContext } from "../../context/TachContext";
+import { TechContext } from "../../context/TechContext";
 
 // Components
 import { InputErrorMessage } from "../errorMessage/errorMessage";

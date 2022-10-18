@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { DevsProvider } from "./context/DevsContext";
 import { UserProvider } from "./context/UserContext";
 import { ChakraProvider } from "@chakra-ui/react";
-import { TechProvider } from "./context/TachContext";
+import { TechProvider } from "./context/TechContext";
 import { WorksProvider } from "./context/WorksContext";
 
 import { App } from "./App";

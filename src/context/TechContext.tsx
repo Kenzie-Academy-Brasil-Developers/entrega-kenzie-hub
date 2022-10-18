@@ -2,12 +2,28 @@ import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useDisclosure } from "@chakra-ui/react";
 
+// Utilities
 import { api } from "../services/api";
 import { UserContext } from "./UserContext";
 
+interface UserPropsInterface {
+  children: React.ReactNode;
+}
+
+interface NewTechInterface {
+  title: string;
+  status: string;
+}
+
+interface PutTechInterface {
+  status: string;
+}
+
 export const TechContext = createContext({});
 
-export const TechProvider = ({ children }) => {
+export const TechProvider = ({
+  children,
+}: UserPropsInterface) => {
   const {
     isOpen: isOpenAdd,
     onOpen: onOpenAdd,
@@ -22,7 +38,7 @@ export const TechProvider = ({ children }) => {
 
   const { getTecs, setGetTecs } = useContext(UserContext);
 
-  const handleFormTech = async (data) => {
+  const handleFormTech = async (data: NewTechInterface) => {
     try {
       const response = await api.post("/users/techs", data);
       toast.success("Tecnologia inserida!", {
@@ -56,7 +72,7 @@ export const TechProvider = ({ children }) => {
 
   const [getId, setGetId] = useState("");
 
-  const handleDeleteTeach = async (id) => {
+  const handleDeleteTeach = async (id: number) => {
     try {
       await api.delete(`/users/techs/${id}`);
       toast.success("Tecnologia removida!", {
@@ -85,7 +101,7 @@ export const TechProvider = ({ children }) => {
     }
   };
 
-  const handlePathTech = (data) => {
+  const handlePathTech = (data: PutTechInterface) => {
     try {
       api.put(`/users/techs/${getId}`, data);
       toast.success("Nível editado!", {
