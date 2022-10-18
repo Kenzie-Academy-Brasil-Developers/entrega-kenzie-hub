@@ -2,9 +2,15 @@ import { createContext, useEffect, useState } from "react";
 
 import { api } from "../services/api";
 
+interface UserPropsInterface {
+  children: React.ReactNode;
+}
+
 export const DevsContext = createContext({});
 
-export const DevsProvider = ({ children }) => {
+export const DevsProvider = ({
+  children,
+}: UserPropsInterface) => {
   const [isPage, setIsPage] = useState(1);
   const [isDevs, setIsDevs] = useState([]);
   const [isDevSelect, setIsDevSelect] = useState([]);
@@ -13,7 +19,7 @@ export const DevsProvider = ({ children }) => {
   const [isFilterDevs, setIsFilterDevs] = useState([]);
 
   useEffect(() => {
-    const getAllDevs = async () => {
+    async function getAllDevs() {
       try {
         const response = await api.get(
           `/users?perPage=10000`
@@ -23,12 +29,12 @@ export const DevsProvider = ({ children }) => {
       } catch (error) {
         console.log(error);
       }
-    };
-    return getAllDevs;
+    }
+    getAllDevs();
   }, [isPage]);
 
   useEffect(() => {
-    const getDevs = async () => {
+    async function getDevs() {
       try {
         const response = await api.get(
           `/users?perPage=8&page=${isPage}`
@@ -38,11 +44,11 @@ export const DevsProvider = ({ children }) => {
       } catch (error) {
         console.log(error);
       }
-    };
-    return getDevs;
+    }
+    getDevs();
   }, [isPage]);
 
-  const getDevProfile = async (id) => {
+  const getDevProfile = async (id: string) => {
     try {
       const response = await api.get(`/users/${id}`);
 
