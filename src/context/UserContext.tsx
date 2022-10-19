@@ -11,7 +11,10 @@ import { useDisclosure } from "@chakra-ui/react";
 
 // Utilities
 import { api } from "../services/api";
-import { ProfileInterface } from "../types/profileTypes";
+import {
+  ProfileInterface,
+  TechsInterface,
+} from "../types/profileTypes";
 import {
   EditFormInterface,
   LoginFormInterface,
@@ -23,8 +26,8 @@ interface UserPropsInterface {
 }
 
 interface UserProviderInterface {
-  getTecs: ProfileInterface[];
-  setGetTecs: Dispatch<SetStateAction<ProfileInterface[]>>;
+  getTecs: TechsInterface[];
+  setGetTecs: Dispatch<SetStateAction<TechsInterface[]>>;
   handleForm: (data: LoginFormInterface) => Promise<void>;
   onSubmit: (data: RegisterFormInterface) => Promise<void>;
   newUser: null | LoginFormInterface[];
@@ -132,9 +135,9 @@ export const UserProvider = ({
   const [getProfile, setGetProfile] = useState<
     ProfileInterface[]
   >([]);
-  const [getTecs, setGetTecs] = useState<
-    ProfileInterface[]
-  >([]);
+  const [getTecs, setGetTecs] = useState<TechsInterface[]>(
+    []
+  );
 
   useEffect(() => {
     async function profile() {

@@ -31,15 +31,19 @@ export const User = () => {
       </DivHeader>
 
       <DevContainer>
-        <div className="userData">
-          <h2>{isDevSelect.name}</h2>
-          <span>{isDevSelect.course_module}</span>
-        </div>
+        {isDevSelect.map((dev) => (
+          <div key={dev.id}>
+            <div className="userData">
+              <h2>{dev.name}</h2>
+              <span>{dev.course_module}</span>
+            </div>
 
-        <div className="information">
-          <h2>Bio: {isDevSelect.bio}</h2>
-          <h3>Contato: {isDevSelect.contact}</h3>
-        </div>
+            <div className="information">
+              <h2>Bio: {dev.bio}</h2>
+              <h3>Contato: {dev.contact}</h3>
+            </div>
+          </div>
+        ))}
 
         <div className="techs">
           {isDevTechs.length ? (
