@@ -15,4 +15,3 @@ export const CustomInput: FunctionComponent<CustomInputInterface> =
   React.forwardRef((props, ref) => {
     return <Input {...props} ref={ref as any} />;
   });
-CustomInput.displayName = "CustomInput";

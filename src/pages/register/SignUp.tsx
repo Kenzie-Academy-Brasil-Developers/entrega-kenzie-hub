@@ -2,14 +2,18 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { Link } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { RiLogoutBoxLine } from "react-icons/ri";
+
+// Utilities
+import { UserContext } from "../../context/UserContext";
 
 // Components
 import { CustonButton } from "../../components/CustomButton/CustonButton";
 import { CustomInput } from "../../components/CustomInput/CustomInput";
 import { CustomLabel } from "../../components/CustomLabels/CustomLabels";
+import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
 
 // Styles
 import {
@@ -18,86 +22,63 @@ import {
   HeaderRegister,
 } from "./registerStyles";
 import "react-toastify/dist/ReactToastify.css";
-import { InputErrorMessage } from "../../components/errorMessage/errorMessage";
-import { UserContext } from "../../context/UserContext";
-import { Link } from "react-router-dom";
+
+type FormValues = {
+  name: string;
+  email: string;
+  contact: string;
+  bio: string;
+  password: string;
+  course_module: string;
+  confirmPass: string;
+};
 
 export const SignUp = () => {
   const formSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required(
-        <InputErrorMessage>
-          Nome obrigatório
-        </InputErrorMessage>
-      ),
+    name: yup.string().required("Nome obrigatório"),
     email: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          E-mail obrigatório
-        </InputErrorMessage>
-      )
-      .email(
-        <InputErrorMessage>
-          E-mail inválido, tente outro e-mail
-        </InputErrorMessage>
-      ),
+      .required("E-mail obrigatório")
+      .email("E-mail inválido, tente outro e-mail"),
     password: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Senha obrigatória
-        </InputErrorMessage>
-      )
-      .min(
-        8,
-        <InputErrorMessage>
-          A senha deve conter no mínimo 8 caracteres
-        </InputErrorMessage>
+      .required("Senha obrigatória")
+      .min(8, "Deve conter no mínimo 8 caracteres")
+      .matches(
+        /[A-Z]/,
+        "Deve conter ao menos uma letra maiúscula"
       )
       .matches(
-        "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-        "Formato inválido, adicione pelo menos uma letra maiuscula e um caracter especial"
+        /[a-z]/,
+        "Deve conter ao menos uma letra minúscula"
+      )
+      .matches(/[0-9]/, "Deve conter ao menos um número")
+      .matches(
+        /(\W)|_/,
+        "Deve conter ao menos um caracter especial"
       ),
     confirmPass: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Confirmação de senha obrigatória
-        </InputErrorMessage>
-      )
-      .min(
-        8,
-        <InputErrorMessage>
-          A senha deve conter no mínimo 8 caracteres
-        </InputErrorMessage>
+      .required("Confirmação de senha obrigatória")
+      .min(8, "Deve conter no mínimo 8 caracteres")
+      .matches(
+        /[A-Z]/,
+        "Deve conter ao menos uma letra maiúscula"
       )
       .matches(
-        "^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$",
-        "Formato inválido, adicione pelo menos uma letra maiuscula e um caracter especial"
+        /[a-z]/,
+        "Deve conter ao menos uma letra minúscula"
+      )
+      .matches(/[0-9]/, "Deve conter ao menos um número")
+      .matches(
+        /(\W)|_/,
+        "Deve conter ao menos um caracter especial"
       ),
-    bio: yup
-      .string()
-      .required(
-        <InputErrorMessage>
-          Bio obrigatória
-        </InputErrorMessage>
-      ),
-    contact: yup
-      .string()
-      .required(
-        <InputErrorMessage>
-          Contato obrigatório
-        </InputErrorMessage>
-      ),
+    bio: yup.string().required("Bio obrigatória"),
+    contact: yup.string().required("Contato obrigatório"),
     course_module: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Módulo obrigatório
-        </InputErrorMessage>
-      ),
+      .required("Módulo obrigatório"),
   });
 
   const {
@@ -105,7 +86,7 @@ export const SignUp = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(formSchema),
   });
 
@@ -131,25 +112,26 @@ export const SignUp = () => {
 
         <CustomLabel labelName={"name"}>Nome</CustomLabel>
         <CustomInput
-          name="name"
           placeholder="Digite seu nome"
           {...register("name")}
         />
-        {errors.name?.message}
+        <InputErrorMessage>
+          {errors.name?.message}
+        </InputErrorMessage>
 
         <CustomLabel labelName="email">E-mail</CustomLabel>
         <CustomInput
-          name="email"
           placeholder="Digite seu e-mail"
           {...register("email")}
         />
-        {errors.email?.message}
+        <InputErrorMessage>
+          {errors.email?.message}
+        </InputErrorMessage>
 
-        <CustomLabel labelName="password" type="password">
+        <CustomLabel labelName="password">
           Senha
         </CustomLabel>
         <CustomInput
-          name="password"
           placeholder="Digite sua senha"
           type="password"
           {...register("password")}
@@ -162,7 +144,6 @@ export const SignUp = () => {
           Confirmar senha
         </CustomLabel>
         <CustomInput
-          name="confirmsPass"
           placeholder="Confirme a senha"
           type="password"
           {...register("confirmPass", {
@@ -177,31 +158,31 @@ export const SignUp = () => {
 
         <CustomLabel labelName="bio">Bio</CustomLabel>
         <CustomInput
-          name="bio"
           placeholder="Conte sobre você"
           {...register("bio")}
         />
-        {errors.bio?.message}
+        <InputErrorMessage>
+          {errors.bio?.message}
+        </InputErrorMessage>
 
         <CustomLabel labelName="contact">
           Contato
         </CustomLabel>
         <CustomInput
-          name="contact"
           placeholder="Opção de contato"
           {...register("contact")}
         />
-        {errors.contact?.message}
+        <InputErrorMessage>
+          {errors.contact?.message}
+        </InputErrorMessage>
 
         <CustomLabel labelName="selectModule">
           Selecionar módulo
         </CustomLabel>
-        <select
-          name="selectModule"
-          id=""
-          {...register("course_module")}
-        >
-          {errors.course_module?.message}
+        <select id="" {...register("course_module")}>
+          <InputErrorMessage>
+            {errors.course_module?.message}
+          </InputErrorMessage>
           <option value="">Selecione um módulo</option>
 
           <option value="Primeiro módulo(Introdução ao Frontend)">

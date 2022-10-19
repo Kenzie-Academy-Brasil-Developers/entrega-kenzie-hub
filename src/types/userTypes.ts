@@ -9,7 +9,7 @@ export interface RegisterFormInterface {
   name: string;
   bio: string;
   contact: string;
-  couse_module: string;
+  course_module: string;
 }
 
 export interface EditFormInterface {
