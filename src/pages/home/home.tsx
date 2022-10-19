@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CustonButton } from "../../components/CustomButton/CustonButton";
@@ -16,6 +16,14 @@ import {
   DivSearch,
 } from "./homeStyles";
 
+interface HandleFilterInterface {
+  target: any;
+  preventDefault: () => void;
+  event?:
+    | React.ChangeEvent<HTMLInputElement>
+    | React.MouseEvent<HTMLElement>;
+}
+
 export const HomePage = () => {
   const [isFiltered, setIsFiltered] = useState("");
 
@@ -27,7 +35,7 @@ export const HomePage = () => {
     isFilterDevs,
   } = useContext(DevsContext);
 
-  const handleFilter = (event) => {
+  const handleFilter = (event: HandleFilterInterface) => {
     event.preventDefault();
 
     setIsFiltered(event.target.value);

@@ -7,8 +7,9 @@ export interface ProfileInterface {
   name: string;
   contact: string;
   email: string;
-  couse_module: string;
+  course_module: string;
   token: string;
+  bio: string;
 }
 
 export interface UserInterface {

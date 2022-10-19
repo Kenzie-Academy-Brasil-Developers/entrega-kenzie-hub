@@ -1,8 +1,9 @@
+import { ButtonHTMLAttributes } from "react";
 import { Button } from "./CustonButtonStyles";
 
-interface ButtonPropsInterface {
-  children: React.ReactNode;
-  startIcon: React.ReactNode;
+interface ButtonPropsInterface
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
+  startIcon?: React.ReactNode;
 }
 
 export const CustonButton = ({
