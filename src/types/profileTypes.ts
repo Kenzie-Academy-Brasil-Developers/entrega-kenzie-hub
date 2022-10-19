@@ -1,7 +1,7 @@
 import { SetStateAction } from "react";
 
 export interface ProfileInterface {
-  works: SetStateAction<never[]>;
+  works: SetStateAction<ProfileInterface[]>;
   user: [
     id: string,
     name: string,

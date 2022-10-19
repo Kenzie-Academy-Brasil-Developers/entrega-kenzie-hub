@@ -20,9 +20,17 @@ import {
 // Utilities
 import { WorksContext } from "../../context/WorksContext";
 
+// Components
+import { InputErrorMessage } from "../errorMessage/errorMessage";
+
 // Styles
 import { DivModal } from "./ModalStyles";
-import { InputErrorMessage } from "../errorMessage/errorMessage";
+
+type FormValues = {
+  title: string;
+  description: string;
+  deploy_url: string;
+};
 
 export const AddWorkModal = () => {
   const { newWork, isOpenNewWork, onCloseNewWork } =
@@ -31,32 +39,20 @@ export const AddWorkModal = () => {
   const workSchema = yup.object().shape({
     title: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Nome do projeto obrigatório
-        </InputErrorMessage>
-      ),
+      .required("Nome do projeto obrigatório"),
     description: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Descrição do projeto obrigatório
-        </InputErrorMessage>
-      ),
+      .required("Descrição do projeto obrigatório"),
     deploy_url: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Link do projeto obrigatório
-        </InputErrorMessage>
-      ),
+      .required("Link do projeto obrigatório"),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(workSchema),
   });
 
@@ -91,13 +87,14 @@ export const AddWorkModal = () => {
                   Nome do projeto
                 </FormLabel>
                 <Input
-                  ref={initialRef}
                   placeholder="Titulo do projeto"
                   color="#F8F9FA"
                   marginBottom="12px"
                   {...register("title")}
                 />
-                {errors.title?.message}
+                <InputErrorMessage>
+                  {errors.title?.message}
+                </InputErrorMessage>
               </FormControl>
 
               <FormControl mt={4}>
@@ -110,7 +107,9 @@ export const AddWorkModal = () => {
                   marginBottom="12px"
                   {...register("description")}
                 />
-                {errors.description?.message}
+                <InputErrorMessage>
+                  {errors.description?.message}
+                </InputErrorMessage>
               </FormControl>
 
               <FormControl mt={4}>
@@ -123,7 +122,9 @@ export const AddWorkModal = () => {
                   marginBottom="12px"
                   {...register("deploy_url")}
                 />
-                {errors.deploy_url?.message}
+                <InputErrorMessage>
+                  {errors.deploy_url?.message}
+                </InputErrorMessage>
               </FormControl>
             </ModalBody>
 

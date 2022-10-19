@@ -1,16 +1,33 @@
 import { useDisclosure } from "@chakra-ui/react";
 import {
   createContext,
+  Dispatch,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
 } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
+import { ProfileInterface } from "../types/profileTypes";
 import { UserContext } from "./UserContext";
 
-interface UserPropsInterface {
+interface WorkPropsInterface {
   children: React.ReactNode;
+}
+
+interface WorkProvidersInterface {
+  getWork: ProfileInterface[];
+  newWork: (data: NewWorkInterface) => void;
+  isOpenNewWork: boolean;
+  onOpenNewWork: () => void;
+  onCloseNewWork: () => void;
+  isOpenPutWork: boolean;
+  onClosePutWork: () => void;
+  onOpenPutWork: () => void;
+  setGetWorkId: Dispatch<SetStateAction<string>>;
+  deleteWork: () => void;
+  handlePutWork: (data: PutWorkInterface) => void;
 }
 
 interface NewWorkInterface {
@@ -21,14 +38,17 @@ interface NewWorkInterface {
 
 interface PutWorkInterface {
   title: string;
-  deploy_url: string;
+  description: string;
 }
 
-export const WorksContext = createContext({});
+export const WorksContext =
+  createContext<WorkProvidersInterface>(
+    {} as WorkProvidersInterface
+  );
 
 export const WorksProvider = ({
   children,
-}: UserPropsInterface) => {
+}: WorkPropsInterface) => {
   const {
     isOpen: isOpenNewWork,
     onOpen: onOpenNewWork,
@@ -43,7 +63,9 @@ export const WorksProvider = ({
 
   const { getProfile } = useContext(UserContext);
 
-  const [getWork, setGetWork] = useState([]);
+  const [getWork, setGetWork] = useState<
+    ProfileInterface[]
+  >([]);
 
   const [getWorkId, setGetWorkId] = useState("");
 

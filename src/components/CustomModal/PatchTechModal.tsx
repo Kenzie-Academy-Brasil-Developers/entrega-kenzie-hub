@@ -37,8 +37,6 @@ export const PatchTechModal = () => {
     getId,
   } = useContext(TechContext);
 
-  // console.log(getId);
-
   const initialRef = useRef(null);
   const finalRef = useRef(null);
 
