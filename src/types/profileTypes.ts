@@ -10,6 +10,9 @@ export interface ProfileInterface {
   course_module: string;
   token: string;
   bio: string;
+  title: string;
+  description: string;
+  deploy_url: string;
 }
 
 export interface UserInterface {

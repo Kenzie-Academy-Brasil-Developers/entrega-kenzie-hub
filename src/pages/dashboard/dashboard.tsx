@@ -20,6 +20,7 @@ import { AddTechModal } from "../../components/CustomModal/AddTechModal";
 import { PatchTechModal } from "../../components/CustomModal/PatchTechModal";
 import { AddWorkModal } from "../../components/CustomModal/AddWorkModal";
 import { PutWorkModal } from "../../components/CustomModal/PutWorksModal";
+import { EditProfileModal } from "../../components/CustomModal/EditProfileModal";
 
 // Styles
 import {
@@ -28,7 +29,6 @@ import {
   ContainerWorks,
   HeaderDash,
 } from "./dashboardStyles";
-import { EditProfileModal } from "../../components/CustomModal/EditProfileModal";
 
 export const Dashboard = () => {
   const { getProfile, getTecs, onOpenEditProfile } =
