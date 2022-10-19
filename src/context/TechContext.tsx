@@ -1,4 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useState,
+} from "react";
 import { toast } from "react-toastify";
 import { useDisclosure } from "@chakra-ui/react";
 
@@ -10,6 +16,20 @@ interface UserPropsInterface {
   children: React.ReactNode;
 }
 
+interface TechProviderInterface {
+  handleFormTech: (data: NewTechInterface) => Promise<void>;
+  isOpenAdd: boolean;
+  onOpenAdd: () => void;
+  onCloseAdd: () => void;
+  handleDeleteTeach: (id: string) => Promise<void>;
+  isOpenTech: boolean;
+  onOpenTech: () => void;
+  onCloseTech: () => void;
+  setGetId: Dispatch<SetStateAction<string>>;
+  getId: string;
+  handlePathTech: (data: PutTechInterface) => void;
+}
+
 interface NewTechInterface {
   title: string;
   status: string;
@@ -19,7 +39,10 @@ interface PutTechInterface {
   status: string;
 }
 
-export const TechContext = createContext({});
+export const TechContext =
+  createContext<TechProviderInterface>(
+    {} as TechProviderInterface
+  );
 
 export const TechProvider = ({
   children,

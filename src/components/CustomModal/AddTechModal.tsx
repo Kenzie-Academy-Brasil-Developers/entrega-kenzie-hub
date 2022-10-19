@@ -26,23 +26,29 @@ import { InputErrorMessage } from "../errorMessage/errorMessage";
 
 // Styles
 import { DivModal, Options } from "./ModalStyles";
+import { string } from "yup/lib/locale";
+
+interface ModalPropsInterface {
+  children: React.ReactNode;
+}
+
+type FormValues = {
+  title: string;
+  status: string;
+};
 
 export const AddTechModal = () => {
   const techSchema = yup.object().shape({
     title: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Nome da técnologia obrigatório
-        </InputErrorMessage>
-      ),
+      .required("Nome da técnologia obrigatório"),
   });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(techSchema),
   });
 
@@ -78,14 +84,15 @@ export const AddTechModal = () => {
                   Nome
                 </FormLabel>
                 <Input
-                  ref={initialRef}
                   placeholder="Digite o nome da tecnologia"
                   color="#F8F9FA"
                   borderColor="#F8F9FA"
                   mb={5}
                   {...register("title")}
                 />
-                {errors.title?.message}
+                <InputErrorMessage>
+                  {errors.title?.message}
+                </InputErrorMessage>
               </FormControl>
 
               <FormControl mt={4}>

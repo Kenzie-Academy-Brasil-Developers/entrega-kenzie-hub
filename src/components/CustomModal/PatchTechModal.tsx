@@ -21,8 +21,13 @@ import { TechContext } from "../../context/TechContext";
 // Styles
 import { DivModal, Options } from "./ModalStyles";
 
+type FormValues = {
+  status: string;
+  getId: string;
+};
+
 export const PatchTechModal = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormValues>();
 
   const {
     handlePathTech,
@@ -31,6 +36,8 @@ export const PatchTechModal = () => {
     handleDeleteTeach,
     getId,
   } = useContext(TechContext);
+
+  // console.log(getId);
 
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -89,7 +96,6 @@ export const PatchTechModal = () => {
             >
               <Button
                 type="submit"
-                onClick={() => handleSubmit(getId)}
                 leftIcon={<IoMdBuild />}
                 bg="#59323F"
                 borderColor="#59323F"
