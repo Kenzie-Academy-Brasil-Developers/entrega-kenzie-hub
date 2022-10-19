@@ -25,6 +25,13 @@ import { UserContext } from "../../context/UserContext";
 import { DivModal } from "./ModalStyles";
 import { InputErrorMessage } from "../errorMessage/errorMessage";
 
+type FormValues = {
+  name: string;
+  contact: string;
+  old_password: string;
+  password: string;
+};
+
 export const EditProfileModal = () => {
   const {
     handleEditProfile,
@@ -33,40 +40,15 @@ export const EditProfileModal = () => {
   } = useContext(UserContext);
 
   const changeWorkSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required(
-        <InputErrorMessage>
-          Nome obrigatório
-        </InputErrorMessage>
-      ),
-    contact: yup
-      .string()
-      .required(
-        <InputErrorMessage>
-          Contato obrigatório
-        </InputErrorMessage>
-      ),
+    name: yup.string().required("Nome obrigatório"),
+    contact: yup.string().required("Contato obrigatório"),
     old_password: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Senha antiga obrigatório
-        </InputErrorMessage>
-      ),
+      .required("Senha antiga obrigatório"),
     password: yup
       .string()
-      .required(
-        <InputErrorMessage>
-          Senha obrigatória
-        </InputErrorMessage>
-      )
-      .min(
-        8,
-        <InputErrorMessage>
-          Deve conter no mínimo 8 caracteres
-        </InputErrorMessage>
-      )
+      .required("Senha obrigatória")
+      .min(8, "Deve conter no mínimo 8 caracteres")
       .matches(
         /[A-Z]/,
         "Deve conter ao menos uma letra maiúscula"
@@ -86,7 +68,7 @@ export const EditProfileModal = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: yupResolver(changeWorkSchema),
   });
 
@@ -121,13 +103,14 @@ export const EditProfileModal = () => {
                   Nome
                 </FormLabel>
                 <Input
-                  ref={initialRef}
                   placeholder="Atualize seu nome"
                   color="#F8F9FA"
                   marginBottom="12px"
                   {...register("name")}
                 />
-                {errors.title?.message}
+                <InputErrorMessage>
+                  {errors.name?.message}
+                </InputErrorMessage>
               </FormControl>
 
               <FormControl mt={4}>
@@ -140,7 +123,9 @@ export const EditProfileModal = () => {
                   marginBottom="12px"
                   {...register("contact")}
                 />
-                {errors.contact?.message}
+                <InputErrorMessage>
+                  {errors.contact?.message}
+                </InputErrorMessage>
               </FormControl>
 
               <FormControl>
@@ -148,13 +133,14 @@ export const EditProfileModal = () => {
                   Senha antiga
                 </FormLabel>
                 <Input
-                  ref={initialRef}
                   placeholder="Digite sua senha antiga"
                   color="#F8F9FA"
                   marginBottom="12px"
                   {...register("old_password")}
                 />
-                {errors.old_password?.message}
+                <InputErrorMessage>
+                  {errors.old_password?.message}
+                </InputErrorMessage>
               </FormControl>
 
               <FormControl>
@@ -162,7 +148,6 @@ export const EditProfileModal = () => {
                   Nova Senha
                 </FormLabel>
                 <Input
-                  ref={initialRef}
                   placeholder="Digite sua nova senha"
                   color="#F8F9FA"
                   marginBottom="12px"
