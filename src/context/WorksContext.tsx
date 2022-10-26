@@ -9,7 +9,7 @@ import {
 } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-import { ProfileInterface } from "../types/profileTypes";
+import { WorksInterface } from "../types/profileTypes";
 import { UserContext } from "./UserContext";
 
 interface WorkPropsInterface {
@@ -17,7 +17,7 @@ interface WorkPropsInterface {
 }
 
 interface WorkProvidersInterface {
-  getWork: ProfileInterface[];
+  getWork: WorksInterface[];
   newWork: (data: NewWorkInterface) => void;
   isOpenNewWork: boolean;
   onOpenNewWork: () => void;
@@ -63,9 +63,9 @@ export const WorksProvider = ({
 
   const { getProfile } = useContext(UserContext);
 
-  const [getWork, setGetWork] = useState<
-    ProfileInterface[]
-  >([]);
+  const [getWork, setGetWork] = useState<WorksInterface[]>(
+    []
+  );
 
   const [getWorkId, setGetWorkId] = useState("");
 

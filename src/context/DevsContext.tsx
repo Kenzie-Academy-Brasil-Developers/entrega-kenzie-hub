@@ -12,15 +12,6 @@ interface UserPropsInterface {
   children: React.ReactNode;
 }
 
-// interface DevsSelectInterface {
-//   id: string;
-//   name: string;
-//   contact: string;
-//   email: string;
-//   couse_module: string;
-//   token: string;
-// }
-
 interface DevsProviderInterface {
   handleNextPage: () => void;
   handlePreviusPage: () => void;
@@ -64,11 +55,11 @@ export const DevsProvider = ({
   useEffect(() => {
     async function getAllDevs() {
       try {
-        const response = await api.get(
+        const { data } = await api.get(
           `/users?perPage=10000`
         );
 
-        setIsFilterDevs(response.data);
+        setIsFilterDevs(data);
       } catch (error) {
         console.log(error);
       }
@@ -79,11 +70,11 @@ export const DevsProvider = ({
   useEffect(() => {
     async function getDevs() {
       try {
-        const response = await api.get(
+        const { data } = await api.get(
           `/users?perPage=8&page=${isPage}`
         );
 
-        setIsDevs(response.data);
+        setIsDevs(data);
       } catch (error) {
         console.log(error);
       }
@@ -93,11 +84,11 @@ export const DevsProvider = ({
 
   const getDevProfile = async (id: string) => {
     try {
-      const response = await api.get(`/users/${id}`);
+      const { data } = await api.get(`/users/${id}`);
 
-      setIsDevSelect([response.data]);
-      setIsDevTechs(response.data.techs);
-      setIsDevWorks(response.data.works);
+      setIsDevSelect([data]);
+      setIsDevTechs(data.techs);
+      setIsDevWorks(data.works);
     } catch (error) {
       console.log(error);
     }

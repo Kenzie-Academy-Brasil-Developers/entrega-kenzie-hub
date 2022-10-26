@@ -11,6 +11,7 @@ import { useDisclosure } from "@chakra-ui/react";
 // Utilities
 import { api } from "../services/api";
 import { UserContext } from "./UserContext";
+import { TechsInterface } from "../types/profileTypes";
 
 interface UserPropsInterface {
   children: React.ReactNode;
@@ -61,9 +62,14 @@ export const TechProvider = ({
 
   const { getTecs, setGetTecs } = useContext(UserContext);
 
-  const handleFormTech = async (data: NewTechInterface) => {
+  const handleFormTech = async (
+    dataTech: NewTechInterface
+  ) => {
     try {
-      const response = await api.post("/users/techs", data);
+      const { data } = await api.post<TechsInterface>(
+        "/users/techs",
+        dataTech
+      );
       toast.success("Tecnologia inserida!", {
         position: "top-right",
         autoClose: 2000,
@@ -74,7 +80,7 @@ export const TechProvider = ({
         progress: undefined,
       });
 
-      setGetTecs([...getTecs, response.data]);
+      setGetTecs([...getTecs, data]);
     } catch (error) {
       console.log(error);
 

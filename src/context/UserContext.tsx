@@ -12,13 +12,14 @@ import { useDisclosure } from "@chakra-ui/react";
 // Utilities
 import { api } from "../services/api";
 import {
-  ProfileInterface,
   TechsInterface,
+  UserInterface,
 } from "../types/profileTypes";
 import {
   EditFormInterface,
   LoginFormInterface,
   RegisterFormInterface,
+  ResponseLoginInterface,
 } from "../types/userTypes";
 
 interface UserPropsInterface {
@@ -30,8 +31,7 @@ interface UserProviderInterface {
   setGetTecs: Dispatch<SetStateAction<TechsInterface[]>>;
   handleForm: (data: LoginFormInterface) => Promise<void>;
   onSubmit: (data: RegisterFormInterface) => Promise<void>;
-  newUser: null | LoginFormInterface[];
-  getProfile: ProfileInterface[];
+  getProfile: UserInterface[];
   isOpenEditProfile: boolean;
   onCloseEditProfile: () => void;
   onOpenEditProfile: () => void;
@@ -48,8 +48,6 @@ export const UserContext =
 export const UserProvider = ({
   children,
 }: UserPropsInterface) => {
-  const [newUser, setNewUser] = useState(null);
-
   const navigate = useNavigate();
 
   const {
@@ -58,20 +56,26 @@ export const UserProvider = ({
     onClose: onCloseEditProfile,
   } = useDisclosure();
 
-  const handleForm = async (data: LoginFormInterface) => {
+  const handleForm = async (
+    dataUser: LoginFormInterface
+  ) => {
     try {
-      const response = await api.post("/sessions", {
-        ...data,
-      });
+      const { data } =
+        await api.post<ResponseLoginInterface>(
+          "/sessions",
+          {
+            ...dataUser,
+          }
+        );
       window.localStorage.clear();
 
       window.localStorage.setItem(
         "KenzieHub:token",
-        response.data.token
+        data.token!
       );
       window.localStorage.setItem(
         "KenzieHub:ID",
-        response.data.user.id
+        data.user.id
       );
       toast.success("Login realizado!", {
         position: "top-right",
@@ -82,8 +86,7 @@ export const UserProvider = ({
         draggable: true,
         progress: undefined,
       });
-      const user = response.data;
-      setNewUser(user);
+
       navigate("/dashboard", { replace: true });
     } catch (error) {
       toast.error(
@@ -104,7 +107,7 @@ export const UserProvider = ({
 
   const onSubmit = async (data: RegisterFormInterface) => {
     try {
-      await api.post("/users", data);
+      await api.post<LoginFormInterface>("/users", data);
       toast.success("Conta criada com sucesso!", {
         position: "top-right",
         autoClose: 5000,
@@ -133,7 +136,7 @@ export const UserProvider = ({
   };
 
   const [getProfile, setGetProfile] = useState<
-    ProfileInterface[]
+    UserInterface[]
   >([]);
   const [getTecs, setGetTecs] = useState<TechsInterface[]>(
     []
@@ -145,17 +148,28 @@ export const UserProvider = ({
 
       if (token) {
         try {
-          const response = await api.get("/profile");
+          const { data } = await api.get<UserInterface>(
+            "/profile"
+          );
 
-          setGetProfile([response.data]);
-          setGetTecs(response.data.techs);
+          setGetProfile([data]);
+          setGetTecs(data.techs!);
         } catch (error) {
           console.log(error);
         }
       }
     }
     profile();
-  }, [getTecs, getProfile]);
+    autoLogin();
+  }, [getTecs]);
+
+  const autoLogin = () => {
+    const token = localStorage.getItem("KenzieHub:token");
+
+    if (token) {
+      navigate("/dashboard");
+    }
+  };
 
   const handleEditProfile = async (
     data: EditFormInterface
@@ -194,7 +208,6 @@ export const UserProvider = ({
       value={{
         handleForm,
         onSubmit,
-        newUser,
         getProfile,
         getTecs,
         setGetTecs,

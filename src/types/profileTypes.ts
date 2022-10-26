@@ -13,6 +13,7 @@ export interface ProfileInterface {
   title: string;
   description: string;
   deploy_url: string;
+  techs: TechsInterface[];
 }
 
 export interface UserInterface {
@@ -22,8 +23,8 @@ export interface UserInterface {
   email: string;
   course_module: string;
   bio: string;
-  techs?: TechsInterface[];
-  works?: WorksInterface[];
+  techs: TechsInterface[];
+  works: WorksInterface[];
   created_at?: string;
   updated_at?: string;
   avatar_url?: null | string;
